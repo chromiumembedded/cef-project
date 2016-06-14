@@ -3,6 +3,7 @@ The [Chromium Embedded Framework](https://bitbucket.org/chromiumembedded/cef/) (
 # Quick Links
 
 * Project Page - https://bitbucket.org/chromiumembedded/cef-project
+* Tutorial - https://bitbucket.org/chromiumembedded/cef/wiki/Tutorial
 * Support Forum - http://www.magpcss.org/ceforum/
 
 # Setup
@@ -79,7 +80,7 @@ Here are some activities you might want to try next to gain a better understandi
 * (Windows only) Rename the "cefclient.exe.manifest" file to "myproject.exe.manifest".
 * Re-run the cmake and build commands.
 
-3\. Edit your copy of the cefsimple project as described on the [Tutorial](https://bitbucket.org/chromiumembedded/cef/wiki/Tutorial.md) Wiki page.
+3\. Gain a better understanding of the cefsimple application by reading the [Tutorial](https://bitbucket.org/chromiumembedded/cef/wiki/Tutorial.md) Wiki page.
 
 4\. Fork the cef-project repository using Bitbucket and Git to store the source code for your own CEF-based project. See the [ContributingWithGit](https://bitbucket.org/chromiumembedded/cef/wiki/ContributingWithGit.md) Wiki page for details (replace all instances of "cef" with "cef-project" in those instructions).
 

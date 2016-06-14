@@ -36,7 +36,7 @@ cd build
 
 # To perform a Linux build using a 32-bit CEF binary distribution on a 32-bit
 # Linux platform or a 64-bit CEF binary distribution on a 64-bit Linux platform:
-cmake -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Debug ..
+cmake -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Release ..
 make -j4 cefclient cefsimple
 
 # To perform a Mac OS X build using a 64-bit CEF binary distribution:

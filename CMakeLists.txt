@@ -16,7 +16,7 @@ project(cef)
 set_property(GLOBAL PROPERTY OS_FOLDERS ON)
 
 # Specify the CEF distribution version.
-set(CEF_VERSION "3.2704.1427.g95055fe")
+set(CEF_VERSION "3.2924.1570.g558741c")
 
 # Determine the platform.
 if("${CMAKE_SYSTEM_NAME}" STREQUAL "Darwin")
@@ -52,8 +52,10 @@ find_package(CEF REQUIRED)
 add_subdirectory(${CEF_LIBCEF_DLL_WRAPPER_PATH} libcef_dll_wrapper)
 
 # Include sample application targets (executes <target>/CMakeLists.txt).
-add_subdirectory(${CEF_ROOT}/cefclient)
-add_subdirectory(${CEF_ROOT}/cefsimple)
+add_subdirectory(${CEF_ROOT}/tests/cefclient)
+add_subdirectory(${CEF_ROOT}/tests/cefsimple)
+add_subdirectory(${CEF_ROOT}/tests/gtest)
+add_subdirectory(${CEF_ROOT}/tests/ceftests)
 
 # TODO: Include other application targets here.
 

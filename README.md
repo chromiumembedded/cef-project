@@ -77,7 +77,7 @@ Here are some activities you might want to try next to gain a better understandi
 * Copy the contents of the "third_party/cef/cef_binary_*/cefsimple" directory to "myproject" as a starting point.
 * Add a new `add_subdirectory(myproject)` command near the end of [top-level CMakeLists.txt file](https://bitbucket.org/chromiumembedded/cef-project/src/master/CMakeLists.txt?fileviewer=file-view-default) after the existing add_subdirectory commands.
 * Change the "CEF_TARGET" and "CEF_HELPER_TARGET" values in "myproject/CMakeLists.txt" from "cefsimple" to "myproject".
-* (Windows only) Rename the "cefclient.exe.manifest" file to "myproject.exe.manifest".
+* (Windows only) Rename the "cefclient.exe.manifest" file to "myproject.exe.manifest" in both "myproject/CMakeLists.txt" and the "myproject" directory.
 * Re-run the cmake and build commands.
 
 3\. Gain a better understanding of the cefsimple application by reading the [Tutorial](https://bitbucket.org/chromiumembedded/cef/wiki/Tutorial.md) Wiki page.

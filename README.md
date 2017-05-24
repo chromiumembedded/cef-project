@@ -63,6 +63,18 @@ CMake supports different generators on each platform. Run `cmake --help` to list
 
 Ninja is a cross-platform open-source tool for running fast builds using pre-installed platform toolchains (GNU, clang, Xcode or MSVC). See comments in the "third_party/cef/cef_binary_*/CMakeLists.txt" file for Ninja usage instructions.
 
+# Examples
+
+CEF provides a number of examples that you can use as a starting point or reference for your own CEF-based development.
+
+* By default all example targets will be included in the project files generated using CMake.
+* The CEF binary distribution includes cefsimple and cefclient sample applications.
+    * The cefsimple application demonstrates the minimal implementation required for a standalone executable target and is described on the [Tutorial](https://bitbucket.org/chromiumembedded/cef/wiki/Tutorial.md) Wiki page.
+    * The cefclient application demonstrates a wide range of CEF functionality most of which is documented on the [GeneralUsage](https://bitbucket.org/chromiumembedded/cef/wiki/GeneralUsage.md) Wiki page.
+* The [examples directory](examples) contains example targets that demonstrate specific aspects of CEF functionality.
+    * See the [examples README.md file](examples/README.md) for information about the examples targets.
+    * Add `-DWITH_EXAMPLES=Off` to the cmake command-line if you do not wish to build the examples targets.
+
 # Next Steps
 
 Here are some activities you might want to try next to gain a better understanding of CEF:
@@ -71,7 +83,7 @@ Here are some activities you might want to try next to gain a better understandi
 
 * Visit the [Spotify automated builder](http://opensource.spotify.com/cefbuilds/index.html) page to see what CEF versions are available.
 * Change the "CEF_VERSION" value near the top of the [top-level CMakeLists.txt file](https://bitbucket.org/chromiumembedded/cef-project/src/master/CMakeLists.txt?fileviewer=file-view-default).
-* Re-run the cmake and build commands.
+* Re-run the cmake and build commands. Add `-DWITH_EXAMPLES=Off` to the cmake command-line to disable targets from the [examples directory](examples) because they may not build successfully with the new CEF version.
 
 2\. Add your own project source code:
 

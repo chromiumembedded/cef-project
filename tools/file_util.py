@@ -37,3 +37,7 @@ def get_files(search_glob):
     """ Returns all files matching the search glob. """
     # Sort the result for consistency across platforms.
     return sorted(iglob(search_glob))
+
+def eval_file(src):
+    """ Loads and evaluates the contents of the specified file. """
+    return eval(read_file(src), {'__builtins__': None}, None)

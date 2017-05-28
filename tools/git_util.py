@@ -8,6 +8,7 @@ import sys
 # Git must be in the system PATH.
 git_exe = 'git'
 
+
 def get_changed_files(path, hash):
   """ Retrieves the list of changed files. """
   if hash == 'unstaged':

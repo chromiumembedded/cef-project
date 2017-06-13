@@ -23,6 +23,9 @@ void OnBeforeClose(CefRefPtr<CefBrowser> browser);
 // Platform-specific implementation.
 void PlatformTitleChange(CefRefPtr<CefBrowser> browser, const CefString& title);
 
+// Returns the contents of |request| as a string.
+std::string DumpRequestContents(CefRefPtr<CefRequest> request);
+
 }  // shared
 
 #endif  // CEF_EXAMPLES_SHARED_CLIENT_BASE_H_

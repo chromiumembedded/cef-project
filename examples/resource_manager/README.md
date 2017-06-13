@@ -1,4 +1,4 @@
-# Message Router Example Application
+# Resource Manager Example Application
 
 This directory contains the "resource_manager" target which demonstrates how to handle resource requests using [CefResourceManager](https://bitbucket.org/chromiumembedded/cef/src/master/include/wrapper/cef_resource_manager.h?at=master&fileviewer=file-view-default).
 

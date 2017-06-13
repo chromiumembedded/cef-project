@@ -32,7 +32,7 @@ class RequestDumpResourceProvider : public CefResourceManager::Provider {
       return false;
     }
 
-    const std::string& dump = DumpRequestContents(request->request());
+    const std::string& dump = shared::DumpRequestContents(request->request());
     std::string str =
         "<html><body bgcolor=\"white\"><pre>" + dump + "</pre></body></html>";
     CefRefPtr<CefStreamReader> stream = CefStreamReader::CreateForData(
@@ -43,27 +43,6 @@ class RequestDumpResourceProvider : public CefResourceManager::Provider {
   }
 
  private:
-  // Returns the contents of |request| as a string.
-  static std::string DumpRequestContents(CefRefPtr<CefRequest> request) {
-    std::stringstream ss;
-
-    ss << "URL: " << std::string(request->GetURL());
-    ss << "\nMethod: " << std::string(request->GetMethod());
-
-    CefRequest::HeaderMap headerMap;
-    request->GetHeaderMap(headerMap);
-    if (headerMap.size() > 0) {
-      ss << "\nHeaders:";
-      CefRequest::HeaderMap::const_iterator it = headerMap.begin();
-      for (; it != headerMap.end(); ++it) {
-        ss << "\n\t" << std::string((*it).first) << ": "
-           << std::string((*it).second);
-      }
-    }
-
-    return ss.str();
-  }
-
   std::string url_;
 
   DISALLOW_COPY_AND_ASSIGN(RequestDumpResourceProvider);

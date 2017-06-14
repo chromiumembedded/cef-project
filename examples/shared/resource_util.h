@@ -42,7 +42,7 @@ std::string GetMimeType(const std::string& resource_path);
 // Implemented for individual executable targets as follows:
 // 1. Add the ID value in */resources/win/resource.h
 // 2. Add the ID to file path mapping in */resources/win/resource.rc
-// 2. Add the |resource_path| to ID mapping in */resource_util_win_*.cc.
+// 2. Add the |resource_path| to ID mapping in */resource_util_win_impl.cc.
 int GetResourceId(const std::string& resource_path);
 
 // Create a new provider for loading BINARY resources on Windows. Only URLs
@@ -65,6 +65,6 @@ CefRefPtr<CefStreamReader> GetResourceReader(const std::string& resource_path);
 CefRefPtr<CefResourceHandler> GetResourceHandler(
     const std::string& resource_path);
 
-}  // shared
+}  // namespace shared
 
 #endif  // CEF_EXAMPLES_SHARED_RESOURCE_UTIL_H_

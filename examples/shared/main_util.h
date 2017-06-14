@@ -25,6 +25,6 @@ enum ProcessType {
 // Determine the process type based on command-line arguments.
 ProcessType GetProcessType(const CefRefPtr<CefCommandLine>& command_line);
 
-}  // shared
+}  // namespace shared
 
 #endif  // CEF_EXAMPLES_SHARED_APP_UTIL_H_

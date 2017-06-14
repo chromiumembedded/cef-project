@@ -135,4 +135,4 @@ void RegisterSchemeHandlerFactory() {
                                   new ClientSchemeHandlerFactory());
 }
 
-}  // scheme_handler
+}  // namespace scheme_handler

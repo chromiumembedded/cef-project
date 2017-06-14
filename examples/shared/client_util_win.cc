@@ -17,4 +17,4 @@ void PlatformTitleChange(CefRefPtr<CefBrowser> browser,
   SetWindowText(hwnd, std::wstring(title).c_str());
 }
 
-}  // shared
+}  // namespace shared

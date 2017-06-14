@@ -38,4 +38,4 @@ CefRefPtr<CefApp> CreateOtherProcessApp() {
   return new scheme_handler::SubprocessApp();
 }
 
-}  // shared
+}  // namespace shared

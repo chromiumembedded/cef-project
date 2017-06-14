@@ -10,6 +10,6 @@ namespace shared {
 // Entry point function shared by sub-process helpers on macOS.
 int main(int argc, char* argv[]);
 
-}  // shared
+}  // namespace shared
 
 #endif  // CEF_EXAMPLES_SHARED_PROCESS_HELPER_MAC_H_

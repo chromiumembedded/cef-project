@@ -20,6 +20,6 @@ int APIENTRY wWinMain(HINSTANCE hInstance);
 int main(int argc, char* argv[]);
 #endif
 
-}  // shared
+}  // namespace shared
 
 #endif  // CEF_EXAMPLES_SHARED_MAIN_H_

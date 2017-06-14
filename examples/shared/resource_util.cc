@@ -54,4 +54,4 @@ CefRefPtr<CefResourceHandler> GetResourceHandler(
   return new CefStreamResourceHandler(GetMimeType(resource_path), reader);
 }
 
-}  // shared
+}  // namespace shared

@@ -10,4 +10,4 @@ const char kScheme[] = "client";
 const char kDomain[] = "tests";
 const char kFileName[] = "scheme_handler.html";
 
-}  // scheme_handler
+}  // namespace scheme_handler

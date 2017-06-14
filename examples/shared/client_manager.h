@@ -43,6 +43,6 @@ class ClientManager {
   BrowserList browser_list_;
 };
 
-}  // shared
+}  // namespace shared
 
 #endif  // CEF_EXAMPLES_SHARED_CLIENT_MANAGER_H_

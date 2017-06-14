@@ -11,4 +11,4 @@ CefRefPtr<CefApp> CreateOtherProcessApp() {
   return NULL;
 }
 
-}  // shared
+}  // namespace shared

@@ -45,4 +45,4 @@ void PlatformTitleChange(CefRefPtr<CefBrowser> browser,
   XStoreName(display, browser->GetHost()->GetWindowHandle(), titleStr.c_str());
 }
 
-}  // shared
+}  // namespace shared

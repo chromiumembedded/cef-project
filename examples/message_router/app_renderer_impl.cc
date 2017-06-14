@@ -60,4 +60,4 @@ CefRefPtr<CefApp> CreateRendererProcessApp() {
   return new message_router::RendererApp();
 }
 
-}  // shared
+}  // namespace shared

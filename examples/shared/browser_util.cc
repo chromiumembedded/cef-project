@@ -101,4 +101,4 @@ void CreateBrowser(CefRefPtr<CefClient> client,
   }
 }
 
-}  // shared
+}  // namespace shared

@@ -50,4 +50,4 @@ ProcessType GetProcessType(const CefRefPtr<CefCommandLine>& command_line) {
   return PROCESS_TYPE_OTHER;
 }
 
-}  // shared
+}  // namespace shared

@@ -61,6 +61,6 @@ class Client : public CefClient,
   DISALLOW_COPY_AND_ASSIGN(Client);
 };
 
-}  // message_router
+}  // namespace message_router
 
 #endif  // CEF_EXAMPLES_MESSAGE_ROUTER_CLIENT_IMPL_H_

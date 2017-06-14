@@ -2,8 +2,8 @@
 // reserved. Use of this source code is governed by a BSD-style license that
 // can be found in the LICENSE file.
 
-#ifndef CEF_EXAMPLES_DEFAULT_CLIENT_MINIMAL_H_
-#define CEF_EXAMPLES_DEFAULT_CLIENT_MINIMAL_H_
+#ifndef CEF_EXAMPLES_MINIMAL_CLIENT_MINIMAL_H_
+#define CEF_EXAMPLES_MINIMAL_CLIENT_MINIMAL_H_
 
 #include "include/cef_client.h"
 
@@ -34,6 +34,6 @@ class Client : public CefClient,
   DISALLOW_COPY_AND_ASSIGN(Client);
 };
 
-}  // minimal
+}  // namespace minimal
 
-#endif  // CEF_EXAMPLES_DEFAULT_CLIENT_MINIMAL_H_
+#endif  // CEF_EXAMPLES_MINIMAL_CLIENT_MINIMAL_H_

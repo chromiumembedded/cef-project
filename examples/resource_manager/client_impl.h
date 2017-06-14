@@ -51,6 +51,6 @@ class Client : public CefClient,
   DISALLOW_COPY_AND_ASSIGN(Client);
 };
 
-}  // resource_manager
+}  // namespace resource_manager
 
 #endif  // CEF_EXAMPLES_RESOURCE_MANAGER_CLIENT_IMPL_H_

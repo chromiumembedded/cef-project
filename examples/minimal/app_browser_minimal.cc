@@ -43,4 +43,4 @@ CefRefPtr<CefApp> CreateBrowserProcessApp() {
   return new minimal::BrowserApp();
 }
 
-}  // shared
+}  // namespace shared

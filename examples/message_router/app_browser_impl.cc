@@ -48,4 +48,4 @@ CefRefPtr<CefApp> CreateBrowserProcessApp() {
   return new message_router::BrowserApp();
 }
 
-}  // shared
+}  // namespace shared

@@ -25,6 +25,6 @@ CefRefPtr<CefApp> CreateRendererProcessApp();
 // Called in other sub-processes to create the CefApp for that process.
 CefRefPtr<CefApp> CreateOtherProcessApp();
 
-}  // shared
+}  // namespace shared
 
 #endif  // CEF_EXAMPLES_SHARED_APP_FACTORY_H_

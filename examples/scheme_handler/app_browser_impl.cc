@@ -64,4 +64,4 @@ CefRefPtr<CefApp> CreateBrowserProcessApp() {
   return new scheme_handler::BrowserApp();
 }
 
-}  // shared
+}  // namespace shared

@@ -1,10 +1,8 @@
-// Copyright (c) 2013 The Chromium Embedded Framework Authors. All rights
+// Copyright (c) 2017 The Chromium Embedded Framework Authors. All rights
 // reserved. Use of this source code is governed by a BSD-style license that
 // can be found in the LICENSE file.
 
-#include "examples/shared/browser_util.h"
-
-#include <cstring>
+#include "examples/shared/resource_util.h"
 
 #include "examples/scheme_handler/resources/win/resource.h"
 

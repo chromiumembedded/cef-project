@@ -11,4 +11,4 @@ CefRefPtr<CefApp> CreateRendererProcessApp() {
   return NULL;
 }
 
-}  // shared
+}  // namespace shared

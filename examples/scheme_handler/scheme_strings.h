@@ -11,6 +11,6 @@ extern const char kScheme[];
 extern const char kDomain[];
 extern const char kFileName[];
 
-}  // scheme_handler
+}  // namespace scheme_handler
 
 #endif  // CEF_EXAMPLES_SCHEME_HANDLER_SCHEME_STRINGS_H_

@@ -19,4 +19,4 @@ void PlatformTitleChange(CefRefPtr<CefBrowser> browser,
   [window setTitle:str];
 }
 
-}  // shared
+}  // namespace shared

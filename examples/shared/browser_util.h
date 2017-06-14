@@ -17,6 +17,6 @@ void CreateBrowser(CefRefPtr<CefClient> client,
                    const CefString& startup_url,
                    const CefBrowserSettings& settings);
 
-}  // shared
+}  // namespace shared
 
 #endif  // CEF_EXAMPLES_SHARED_BROWSER_UTIL_H_

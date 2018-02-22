@@ -18,7 +18,7 @@ First install some necessary tools and download the cef-project source code.
 
 * Linux: Currently supported distributions include Debian Wheezy, Ubuntu Precise, and related. Ubuntu 14.04 64-bit is recommended. Newer versions will likely also work but may not have been tested. Required packages include: build-essential, libgtk2.0-dev, libgtkglext1-dev.
 * macOS: Xcode 6 or newer building on macOS 10.9 (Mavericks) or newer is required. Xcode 8.3 and macOS 10.12 (Sierra) are recommended. The Xcode command-line tools must also be installed. Only 64-bit builds are supported on macOS.
-* Windows: Visual Studio 2013 or newer building on Windows 7 or newer is required. Visual Studio 2015 Update 3 and Windows 10 64-bit are recommended.
+* Windows: Visual Studio 2013 or newer building on Windows 7 or newer is required. Visual Studio 2017 and Windows 10 64-bit are recommended.
 
 4\. Download the cef-project source code from the [Downloads page](https://bitbucket.org/chromiumembedded/cef-project/downloads) or by using [Git](https://git-scm.com/) command-line tools:
 
@@ -47,12 +47,12 @@ cmake -G "Xcode" ..
 # Then, open build\cef.xcodeproj in Xcode and select Product > Build.
 
 # To perform a Windows build using a 32-bit CEF binary distribution:
-cmake -G "Visual Studio 14" ..
-# Then, open build\cef.sln in Visual Studio 2015 and select Build > Build Solution.
+cmake -G "Visual Studio 15" ..
+# Then, open build\cef.sln in Visual Studio 2017 and select Build > Build Solution.
 
 # To perform a Windows build using a 64-bit CEF binary distribution:
-cmake -G "Visual Studio 14 Win64" ..
-# Then, open build\cef.sln in Visual Studio 2015 and select Build > Build Solution.
+cmake -G "Visual Studio 15 Win64" ..
+# Then, open build\cef.sln in Visual Studio 2017 and select Build > Build Solution.
 ```
 
 CMake supports different generators on each platform. Run `cmake --help` to list all supported generators. Generators that have been tested with CEF include:

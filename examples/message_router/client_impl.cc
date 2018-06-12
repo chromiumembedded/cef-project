@@ -112,6 +112,7 @@ void Client::OnBeforeClose(CefRefPtr<CefBrowser> browser) {
 bool Client::OnBeforeBrowse(CefRefPtr<CefBrowser> browser,
                             CefRefPtr<CefFrame> frame,
                             CefRefPtr<CefRequest> request,
+                            bool user_gesture,
                             bool is_redirect) {
   CEF_REQUIRE_UI_THREAD();
 

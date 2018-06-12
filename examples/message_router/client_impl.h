@@ -39,6 +39,7 @@ class Client : public CefClient,
   bool OnBeforeBrowse(CefRefPtr<CefBrowser> browser,
                       CefRefPtr<CefFrame> frame,
                       CefRefPtr<CefRequest> request,
+                      bool user_gesture,
                       bool is_redirect) OVERRIDE;
   CefRefPtr<CefResourceHandler> GetResourceHandler(
       CefRefPtr<CefBrowser> browser,

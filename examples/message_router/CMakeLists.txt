@@ -61,7 +61,8 @@ endif()
 # Target executable names.
 set(EXAMPLE_TARGET "message_router")
 if(OS_MACOSX)
-  set(EXAMPLE_HELPER_TARGET "message_router Helper")
+  set(EXAMPLE_HELPER_TARGET "message_router_Helper")
+  set(EXAMPLE_HELPER_OUTPUT_NAME "message_router Helper")
 endif()
 
 
@@ -92,7 +93,7 @@ if(OS_MACOSX)
 
   # Output paths for the app bundles.
   set(EXAMPLE_APP "${EXAMPLE_TARGET_OUT_DIR}/${EXAMPLE_TARGET}.app")
-  set(EXAMPLE_HELPER_APP "${EXAMPLE_TARGET_OUT_DIR}/${EXAMPLE_HELPER_TARGET}.app")
+  set(EXAMPLE_HELPER_APP "${EXAMPLE_TARGET_OUT_DIR}/${EXAMPLE_HELPER_OUTPUT_NAME}.app")
 
   # Variable referenced from Info.plist files.
   set(PRODUCT_NAME "${EXAMPLE_TARGET}")
@@ -104,10 +105,8 @@ if(OS_MACOSX)
   target_link_libraries(${EXAMPLE_HELPER_TARGET} shared_helper)
   set_target_properties(${EXAMPLE_HELPER_TARGET} PROPERTIES
     MACOSX_BUNDLE_INFO_PLIST "${CMAKE_CURRENT_SOURCE_DIR}/${SHARED_HELPER_INFO_PLIST}"
+    OUTPUT_NAME ${EXAMPLE_HELPER_OUTPUT_NAME}
     )
-
-  # Fix the framework rpath in the helper executable.
-  FIX_MACOSX_HELPER_FRAMEWORK_RPATH(${EXAMPLE_HELPER_TARGET})
 
   # Main executable target.
   add_executable(${EXAMPLE_TARGET} MACOSX_BUNDLE ${EXAMPLE_SRCS} ${EXAMPLE_RESOURCES_SRCS})
@@ -126,16 +125,13 @@ if(OS_MACOSX)
     # Copy the helper app bundle into the Frameworks directory.
     COMMAND ${CMAKE_COMMAND} -E copy_directory
             "${EXAMPLE_HELPER_APP}"
-            "${EXAMPLE_APP}/Contents/Frameworks/${EXAMPLE_HELPER_TARGET}.app"
+            "${EXAMPLE_APP}/Contents/Frameworks/${EXAMPLE_HELPER_OUTPUT_NAME}.app"
     # Copy the CEF framework into the Frameworks directory.
     COMMAND ${CMAKE_COMMAND} -E copy_directory
             "${CEF_BINARY_DIR}/Chromium Embedded Framework.framework"
             "${EXAMPLE_APP}/Contents/Frameworks/Chromium Embedded Framework.framework"
     VERBATIM
     )
-
-  # Fix the framework rpath in the main executable.
-  FIX_MACOSX_MAIN_FRAMEWORK_RPATH(${EXAMPLE_TARGET})
 
   if(NOT ${CMAKE_GENERATOR} STREQUAL "Xcode")
     # Manually process and copy over resource files.

@@ -65,8 +65,11 @@ if(OS_MACOSX)
   set(SHARED_HELPER_TARGET "shared_helper")
 endif()
 
-# Logical target used to link the libcef library.
-ADD_LOGICAL_TARGET("libcef_lib" "${CEF_LIB_DEBUG}" "${CEF_LIB_RELEASE}")
+if(OS_LINUX OR OS_WINDOWS)
+  # Logical target used to link the libcef library on Linux and Windows.
+  # On macOS the CEF framework is loaded dynamically at startup.
+  ADD_LOGICAL_TARGET("libcef_lib" "${CEF_LIB_DEBUG}" "${CEF_LIB_RELEASE}")
+endif()
 
 
 #
@@ -102,13 +105,19 @@ if(OS_MACOSX)
   add_library(${SHARED_HELPER_TARGET} STATIC ${SHARED_HELPER_SRCS})
   SET_EXAMPLE_LIBRARY_TARGET_PROPERTIES(${SHARED_HELPER_TARGET})
   add_dependencies(${SHARED_HELPER_TARGET} libcef_dll_wrapper)
-  target_link_libraries(${SHARED_HELPER_TARGET} libcef_lib libcef_dll_wrapper ${CEF_STANDARD_LIBS})
+  target_link_libraries(${SHARED_HELPER_TARGET} libcef_dll_wrapper ${CEF_STANDARD_LIBS})
+
+  if(USE_SANDBOX)
+    # Logical target used to link the cef_sandbox library.
+    ADD_LOGICAL_TARGET("cef_sandbox_lib" "${CEF_SANDBOX_LIB_DEBUG}" "${CEF_SANDBOX_LIB_RELEASE}")
+    target_link_libraries(${SHARED_HELPER_TARGET} cef_sandbox_lib)
+  endif()
 
   # Main static library target.
   add_library(${SHARED_TARGET} STATIC ${SHARED_SRCS})
   SET_EXAMPLE_LIBRARY_TARGET_PROPERTIES(${SHARED_TARGET})
   add_dependencies(${SHARED_TARGET} libcef_dll_wrapper "${SHARED_HELPER_TARGET}")
-  target_link_libraries(${SHARED_TARGET} libcef_lib libcef_dll_wrapper ${CEF_STANDARD_LIBS})
+  target_link_libraries(${SHARED_TARGET} libcef_dll_wrapper ${CEF_STANDARD_LIBS})
 endif()
 
 

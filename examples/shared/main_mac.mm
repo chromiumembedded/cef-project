@@ -9,6 +9,7 @@
 
 #include "include/cef_application_mac.h"
 #include "include/wrapper/cef_helpers.h"
+#import "include/wrapper/cef_library_loader.h"
 
 #include "examples/shared/app_factory.h"
 #include "examples/shared/client_manager.h"
@@ -114,6 +115,12 @@ namespace shared {
 
 // Entry point function for the browser process.
 int main(int argc, char* argv[]) {
+  // Load the CEF framework library at runtime instead of linking directly
+  // as required by the macOS sandbox implementation.
+  CefScopedLibraryLoader library_loader;
+  if (!library_loader.LoadInMain())
+    return 1;
+
   // Initialize the AutoRelease pool.
   NSAutoreleasePool* autopool = [[NSAutoreleasePool alloc] init];
 

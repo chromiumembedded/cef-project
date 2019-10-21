@@ -18,7 +18,7 @@ class SubprocessApp : public CefApp {
       CefRawPtr<CefSchemeRegistrar> registrar) OVERRIDE {
     // Register the custom scheme as standard and secure.
     // Must be the same implementation in all processes.
-    registrar->AddCustomScheme(kScheme, true, false, false, true, false, false);
+    registrar->AddCustomScheme(kScheme, kSchemeRegistrationOptions);
   }
 
  private:

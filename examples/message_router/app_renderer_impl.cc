@@ -38,10 +38,11 @@ class RendererApp : public CefApp, public CefRenderProcessHandler {
   }
 
   bool OnProcessMessageReceived(CefRefPtr<CefBrowser> browser,
+                                CefRefPtr<CefFrame> frame,
                                 CefProcessId source_process,
                                 CefRefPtr<CefProcessMessage> message) OVERRIDE {
-    return message_router_->OnProcessMessageReceived(browser, source_process,
-                                                     message);
+    return message_router_->OnProcessMessageReceived(browser, frame,
+                                                     source_process, message);
   }
 
  private:

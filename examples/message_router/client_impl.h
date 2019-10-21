@@ -14,7 +14,8 @@ namespace message_router {
 class Client : public CefClient,
                public CefDisplayHandler,
                public CefLifeSpanHandler,
-               public CefRequestHandler {
+               public CefRequestHandler,
+               public CefResourceRequestHandler {
  public:
   explicit Client(const CefString& startup_url);
 
@@ -23,6 +24,7 @@ class Client : public CefClient,
   CefRefPtr<CefLifeSpanHandler> GetLifeSpanHandler() OVERRIDE { return this; }
   CefRefPtr<CefRequestHandler> GetRequestHandler() OVERRIDE { return this; }
   bool OnProcessMessageReceived(CefRefPtr<CefBrowser> browser,
+                                CefRefPtr<CefFrame> frame,
                                 CefProcessId source_process,
                                 CefRefPtr<CefProcessMessage> message) OVERRIDE;
 
@@ -41,12 +43,22 @@ class Client : public CefClient,
                       CefRefPtr<CefRequest> request,
                       bool user_gesture,
                       bool is_redirect) OVERRIDE;
+  CefRefPtr<CefResourceRequestHandler> GetResourceRequestHandler(
+      CefRefPtr<CefBrowser> browser,
+      CefRefPtr<CefFrame> frame,
+      CefRefPtr<CefRequest> request,
+      bool is_navigation,
+      bool is_download,
+      const CefString& request_initiator,
+      bool& disable_default_handling) OVERRIDE;
+  void OnRenderProcessTerminated(CefRefPtr<CefBrowser> browser,
+                                 TerminationStatus status) OVERRIDE;
+
+  // CefResourceRequestHandler methods:
   CefRefPtr<CefResourceHandler> GetResourceHandler(
       CefRefPtr<CefBrowser> browser,
       CefRefPtr<CefFrame> frame,
       CefRefPtr<CefRequest> request) OVERRIDE;
-  void OnRenderProcessTerminated(CefRefPtr<CefBrowser> browser,
-                                 TerminationStatus status) OVERRIDE;
 
  private:
   // Handles the browser side of query routing.

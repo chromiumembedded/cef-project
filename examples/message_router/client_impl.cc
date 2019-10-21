@@ -63,12 +63,13 @@ void Client::OnTitleChange(CefRefPtr<CefBrowser> browser,
 }
 
 bool Client::OnProcessMessageReceived(CefRefPtr<CefBrowser> browser,
+                                      CefRefPtr<CefFrame> frame,
                                       CefProcessId source_process,
                                       CefRefPtr<CefProcessMessage> message) {
   CEF_REQUIRE_UI_THREAD();
 
-  return message_router_->OnProcessMessageReceived(browser, source_process,
-                                                   message);
+  return message_router_->OnProcessMessageReceived(browser, frame,
+                                                   source_process, message);
 }
 
 void Client::OnAfterCreated(CefRefPtr<CefBrowser> browser) {
@@ -120,6 +121,25 @@ bool Client::OnBeforeBrowse(CefRefPtr<CefBrowser> browser,
   return false;
 }
 
+CefRefPtr<CefResourceRequestHandler> Client::GetResourceRequestHandler(
+    CefRefPtr<CefBrowser> browser,
+    CefRefPtr<CefFrame> frame,
+    CefRefPtr<CefRequest> request,
+    bool is_navigation,
+    bool is_download,
+    const CefString& request_initiator,
+    bool& disable_default_handling) {
+  CEF_REQUIRE_IO_THREAD();
+  return this;
+}
+
+void Client::OnRenderProcessTerminated(CefRefPtr<CefBrowser> browser,
+                                       TerminationStatus status) {
+  CEF_REQUIRE_UI_THREAD();
+
+  message_router_->OnRenderProcessTerminated(browser);
+}
+
 CefRefPtr<CefResourceHandler> Client::GetResourceHandler(
     CefRefPtr<CefBrowser> browser,
     CefRefPtr<CefFrame> frame,
@@ -137,13 +157,6 @@ CefRefPtr<CefResourceHandler> Client::GetResourceHandler(
     return shared::GetResourceHandler(resource_path);
 
   return NULL;
-}
-
-void Client::OnRenderProcessTerminated(CefRefPtr<CefBrowser> browser,
-                                       TerminationStatus status) {
-  CEF_REQUIRE_UI_THREAD();
-
-  message_router_->OnRenderProcessTerminated(browser);
 }
 
 }  // namespace message_router

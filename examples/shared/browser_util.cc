@@ -81,7 +81,7 @@ void CreateBrowser(CefRefPtr<CefClient> client,
   if (use_views) {
     // Create the BrowserView.
     CefRefPtr<CefBrowserView> browser_view = CefBrowserView::CreateBrowserView(
-        client, startup_url, settings, NULL, NULL);
+        client, startup_url, settings, NULL, NULL, NULL);
 
     // Create the Window. It will show itself after creation.
     CefWindow::CreateTopLevelWindow(new WindowDelegate(browser_view));
@@ -97,7 +97,7 @@ void CreateBrowser(CefRefPtr<CefClient> client,
 
     // Create the browser window.
     CefBrowserHost::CreateBrowser(window_info, client, startup_url, settings,
-                                  NULL);
+                                  NULL, NULL);
   }
 }
 

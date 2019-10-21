@@ -106,6 +106,18 @@ void Client::OnBeforeClose(CefRefPtr<CefBrowser> browser) {
   return shared::OnBeforeClose(browser);
 }
 
+CefRefPtr<CefResourceRequestHandler> Client::GetResourceRequestHandler(
+    CefRefPtr<CefBrowser> browser,
+    CefRefPtr<CefFrame> frame,
+    CefRefPtr<CefRequest> request,
+    bool is_navigation,
+    bool is_download,
+    const CefString& request_initiator,
+    bool& disable_default_handling) {
+  CEF_REQUIRE_IO_THREAD();
+  return this;
+}
+
 cef_return_value_t Client::OnBeforeResourceLoad(
     CefRefPtr<CefBrowser> browser,
     CefRefPtr<CefFrame> frame,

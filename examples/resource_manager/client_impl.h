@@ -14,7 +14,8 @@ namespace resource_manager {
 class Client : public CefClient,
                public CefDisplayHandler,
                public CefLifeSpanHandler,
-               public CefRequestHandler {
+               public CefRequestHandler,
+               public CefResourceRequestHandler {
  public:
   Client();
 
@@ -33,6 +34,16 @@ class Client : public CefClient,
   void OnBeforeClose(CefRefPtr<CefBrowser> browser) OVERRIDE;
 
   // CefRequestHandler methods:
+  CefRefPtr<CefResourceRequestHandler> GetResourceRequestHandler(
+      CefRefPtr<CefBrowser> browser,
+      CefRefPtr<CefFrame> frame,
+      CefRefPtr<CefRequest> request,
+      bool is_navigation,
+      bool is_download,
+      const CefString& request_initiator,
+      bool& disable_default_handling) OVERRIDE;
+
+  // CefResourceRequestHandler methods:
   cef_return_value_t OnBeforeResourceLoad(
       CefRefPtr<CefBrowser> browser,
       CefRefPtr<CefFrame> frame,

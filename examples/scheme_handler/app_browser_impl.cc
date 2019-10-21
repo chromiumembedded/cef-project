@@ -34,11 +34,24 @@ class BrowserApp : public CefApp, public CefBrowserProcessHandler {
     return this;
   }
 
+  void OnBeforeCommandLineProcessing(
+      const CefString& process_type,
+      CefRefPtr<CefCommandLine> command_line) OVERRIDE {
+    // Command-line flags can be modified in this callback.
+    // |process_type| is empty for the browser process.
+    if (process_type.empty()) {
+#if defined(OS_MACOSX)
+      // Disable the macOS keychain prompt. Cookies will not be encrypted.
+      command_line->AppendSwitch("use-mock-keychain");
+#endif
+    }
+  }
+
   void OnRegisterCustomSchemes(
       CefRawPtr<CefSchemeRegistrar> registrar) OVERRIDE {
     // Register the custom scheme as standard and secure.
     // Must be the same implementation in all processes.
-    registrar->AddCustomScheme(kScheme, true, false, false, true, false, false);
+    registrar->AddCustomScheme(kScheme, kSchemeRegistrationOptions);
   }
 
   // CefBrowserProcessHandler methods:

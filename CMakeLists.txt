@@ -76,6 +76,8 @@ if(NOT PYTHON_EXECUTABLE)
   endif()
 endif()
 
+message(STATUS "Using Python: ${PYTHON_EXECUTABLE}")
+
 
 #
 # Clang-format configuration.

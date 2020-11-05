@@ -28,7 +28,7 @@ git clone https://bitbucket.org/chromiumembedded/cef-project.git
 
 # Build
 
-Now run CMake which will download the CEF binary distribution from the [Spotify automated builder](http://opensource.spotify.com/cefbuilds/index.html) and generate build files for your platform. Then build using platform build tools. For example, using the most recent tool versions on each platform:
+Now run CMake which will download the CEF binary distribution from the [Spotify automated builder](https://cef-builds.spotifycdn.com/index.html) and generate build files for your platform. Then build using platform build tools. For example, using the most recent tool versions on each platform:
 
 ```
 cd /path/to/cef-project
@@ -81,7 +81,7 @@ Here are some activities you might want to try next to gain a better understandi
 
 1\. Update the CEF version used to build your local copy of cef-project:
 
-* Visit the [Spotify automated builder](http://opensource.spotify.com/cefbuilds/index.html) page to see what CEF versions are available.
+* Visit the [Spotify automated builder](https://cef-builds.spotifycdn.com/index.html) page to see what CEF versions are available.
 * Change the "CEF_VERSION" value near the top of the [top-level CMakeLists.txt file](https://bitbucket.org/chromiumembedded/cef-project/src/master/CMakeLists.txt?fileviewer=file-view-default).
 * Re-run the cmake and build commands. Add `-DWITH_EXAMPLES=Off` to the cmake command-line to disable targets from the [examples directory](examples) because they may not build successfully with the new CEF version.
 

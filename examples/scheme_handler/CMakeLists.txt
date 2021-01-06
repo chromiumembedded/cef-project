@@ -33,7 +33,7 @@ if(OS_LINUX OR OS_WINDOWS)
     ${EXAMPLE_SRCS}
     app_subprocess_impl.cc
     )
-elseif(OS_MACOSX)
+elseif(OS_MAC)
   # On macOS a separate helper executable is used for subprocesses.
   set(EXAMPLE_HELPER_SRCS
     ${EXAMPLE_COMMON_SRCS}
@@ -69,7 +69,7 @@ endif()
 
 # Target executable names.
 set(EXAMPLE_TARGET "scheme_handler")
-if(OS_MACOSX)
+if(OS_MAC)
   set(EXAMPLE_HELPER_TARGET "scheme_handler_Helper")
   set(EXAMPLE_HELPER_OUTPUT_NAME "scheme_handler Helper")
 endif()
@@ -95,7 +95,7 @@ endif()
 # Mac OS X configuration.
 #
 
-if(OS_MACOSX)
+if(OS_MAC)
   # Create source groups for Xcode.
   SET_EXAMPLE_SOURCE_GROUPS("${EXAMPLE_SRCS}")
   SET_EXAMPLE_SOURCE_GROUPS("${EXAMPLE_HELPER_SRCS}")
@@ -190,7 +190,7 @@ if(OS_MACOSX)
   set(PREFIXES
     "../shared/resources/mac/"
     )
-  COPY_MACOSX_RESOURCES("${EXAMPLE_RESOURCES_SRCS}" "${PREFIXES}" "${EXAMPLE_TARGET}" "${CMAKE_CURRENT_SOURCE_DIR}" "${EXAMPLE_APP}")
+  COPY_MAC_RESOURCES("${EXAMPLE_RESOURCES_SRCS}" "${PREFIXES}" "${EXAMPLE_TARGET}" "${CMAKE_CURRENT_SOURCE_DIR}" "${EXAMPLE_APP}")
 endif()
 
 

@@ -7,7 +7,7 @@
 # the paths must be relative to those directories.
 #
 
-if(OS_MACOSX)
+if(OS_MAC)
   # Shared macOS resources (menus, icons, etc).
   set(SHARED_RESOURCES_SRCS
     ../shared/resources/mac/English.lproj/InfoPlist.strings

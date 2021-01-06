@@ -21,11 +21,15 @@ set_property(GLOBAL PROPERTY OS_FOLDERS ON)
 #
 
 # Specify the CEF distribution version.
-set(CEF_VERSION "81.2.24+gc0b313d+chromium-81.0.4044.113")
+set(CEF_VERSION "87.1.12+g03f9336+chromium-87.0.4280.88")
 
 # Determine the platform.
 if("${CMAKE_SYSTEM_NAME}" STREQUAL "Darwin")
-  set(CEF_PLATFORM "macosx64")
+  if("${PROJECT_ARCH}" STREQUAL "arm64")
+    set(CEF_PLATFORM "macosarm64")
+  else()
+    set(CEF_PLATFORM "macosx64")
+  endif()
 elseif("${CMAKE_SYSTEM_NAME}" STREQUAL "Linux")
   if(CMAKE_SIZEOF_VOID_P MATCHES 8)
     set(CEF_PLATFORM "linux64")

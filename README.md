@@ -16,9 +16,9 @@ First install some necessary tools and download the cef-project source code.
 
 3\. Install platform-specific build tools.
 
-* Linux: Currently supported distributions include Debian Wheezy, Ubuntu Precise, and related. Ubuntu 14.04 64-bit is recommended. Newer versions will likely also work but may not have been tested. Required packages include: build-essential, libgtk2.0-dev, libgtkglext1-dev.
-* macOS: Xcode 6 or newer building on macOS 10.9 (Mavericks) or newer is required. Xcode 10 and macOS 10.14 (Mojave) are recommended. The Xcode command-line tools must also be installed. Only 64-bit builds are supported on macOS.
-* Windows: Visual Studio 2013 or newer building on Windows 7 or newer is required. Visual Studio 2019 and Windows 10 64-bit are recommended.
+* Linux: Currently supported distributions include Debian Wheezy, Ubuntu Precise, and related. Ubuntu 18.04 64-bit is recommended. Newer versions will likely also work but may not have been tested. Required packages include: build-essential, libgtk2.0-dev, libgtkglext1-dev.
+* MacOS: Xcode 8 or newer building on MacOS 10.11 (El Capitan) or newer for x86_64. Xcode 12.2 or newer building on MacOS 10.15.4 (Catalina) or newer for ARM64. The Xcode command-line tools must also be installed. Only 64-bit builds are supported on macOS.
+* Windows: Visual Studio 2015 Update 2 or newer building on Windows 7 or newer. Visual Studio 2019 and Windows 10 64-bit are recommended.
 
 4\. Download the cef-project source code from the [Downloads page](https://bitbucket.org/chromiumembedded/cef-project/downloads) or by using [Git](https://git-scm.com/) command-line tools:
 
@@ -42,8 +42,12 @@ cd build
 cmake -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Release ..
 make -j4
 
-# To perform a macOS build using a 64-bit CEF binary distribution:
-cmake -G "Xcode" ..
+# To perform a MacOS build using a 64-bit CEF binary distribution:
+cmake -G "Xcode" -DPROJECT_ARCH="x86_64" ..
+# Then, open build\cef.xcodeproj in Xcode and select Product > Build.
+
+# To perform a MacOS build using an ARM64 CEF binary distribution:
+cmake -G "Xcode" -DPROJECT_ARCH="arm64" ..
 # Then, open build\cef.xcodeproj in Xcode and select Product > Build.
 
 # To perform a Windows build using a 32-bit CEF binary distribution:
@@ -58,8 +62,8 @@ cmake -G "Visual Studio 16" -A x64 ..
 CMake supports different generators on each platform. Run `cmake --help` to list all supported generators. Generators that have been tested with CEF include:
 
 * Linux: Ninja, Unix Makefiles
-* macOS: Ninja, Xcode 6+
-* Windows: Ninja, Visual Studio 2013+
+* MacOS: Ninja, Xcode 8+ (x86_64) or Xcode 12.2+ (ARM64)
+* Windows: Ninja, Visual Studio 2015+
 
 Ninja is a cross-platform open-source tool for running fast builds using pre-installed platform toolchains (GNU, clang, Xcode or MSVC). See comments in the "third_party/cef/cef_binary_*/CMakeLists.txt" file for Ninja usage instructions.
 

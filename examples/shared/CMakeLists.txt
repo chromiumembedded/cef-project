@@ -32,7 +32,7 @@ set(SHARED_SRCS_LINUX
   resource_util_linux.cc
   resource_util_posix.cc
   )
-set(SHARED_SRCS_MACOSX
+set(SHARED_SRCS_MAC
   client_util_mac.mm
   main_mac.mm
   resource_util_mac.mm
@@ -45,7 +45,7 @@ set(SHARED_SRCS_WINDOWS
   )
 APPEND_PLATFORM_SOURCES(SHARED_SRCS)
 
-if(OS_MACOSX)
+if(OS_MAC)
   # On macOS a separate helper executable is used for subprocesses.
   set(SHARED_HELPER_SRCS
     ${SHARED_COMMON_SRCS}
@@ -61,7 +61,7 @@ endif()
 
 # Target static library names.
 set(SHARED_TARGET "shared")
-if(OS_MACOSX)
+if(OS_MAC)
   set(SHARED_HELPER_TARGET "shared_helper")
 endif()
 
@@ -96,7 +96,7 @@ endif()
 # Mac OS X configuration.
 #
 
-if(OS_MACOSX)
+if(OS_MAC)
   # Create source groups for Xcode.
   SET_EXAMPLE_SOURCE_GROUPS("${SHARED_SRCS}")
   SET_EXAMPLE_SOURCE_GROUPS("${SHARED_HELPER_SRCS}")

@@ -4,6 +4,8 @@
 
 #include "examples/message_router/client_impl.h"
 
+#include <algorithm>
+
 #include "include/wrapper/cef_helpers.h"
 
 #include "examples/shared/client_util.h"
@@ -27,7 +29,7 @@ class MessageHandler : public CefMessageRouterBrowserSide::Handler {
                int64 query_id,
                const CefString& request,
                bool persistent,
-               CefRefPtr<Callback> callback) OVERRIDE {
+               CefRefPtr<Callback> callback) override {
     // Only handle messages from the startup URL.
     const std::string& url = frame->GetURL();
     if (url.find(startup_url_) != 0)
@@ -103,7 +105,7 @@ void Client::OnBeforeClose(CefRefPtr<CefBrowser> browser) {
     // Free the router when the last browser is closed.
     message_router_->RemoveHandler(message_handler_.get());
     message_handler_.reset();
-    message_router_ = NULL;
+    message_router_ = nullptr;
   }
 
   // Call the default shared implementation.
@@ -156,7 +158,7 @@ CefRefPtr<CefResourceHandler> Client::GetResourceHandler(
   if (!resource_path.empty())
     return shared::GetResourceHandler(resource_path);
 
-  return NULL;
+  return nullptr;
 }
 
 }  // namespace message_router

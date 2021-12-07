@@ -23,13 +23,13 @@ class BrowserApp : public CefApp, public CefBrowserProcessHandler {
   BrowserApp() {}
 
   // CefApp methods:
-  CefRefPtr<CefBrowserProcessHandler> GetBrowserProcessHandler() OVERRIDE {
+  CefRefPtr<CefBrowserProcessHandler> GetBrowserProcessHandler() override {
     return this;
   }
 
   void OnBeforeCommandLineProcessing(
       const CefString& process_type,
-      CefRefPtr<CefCommandLine> command_line) OVERRIDE {
+      CefRefPtr<CefCommandLine> command_line) override {
     // Command-line flags can be modified in this callback.
     // |process_type| is empty for the browser process.
     if (process_type.empty()) {
@@ -41,7 +41,7 @@ class BrowserApp : public CefApp, public CefBrowserProcessHandler {
   }
 
   // CefBrowserProcessHandler methods:
-  void OnContextInitialized() OVERRIDE {
+  void OnContextInitialized() override {
     // Create the browser window.
     const CefString& startup_url = GetStartupURL();
     shared::CreateBrowser(new Client(startup_url), startup_url,

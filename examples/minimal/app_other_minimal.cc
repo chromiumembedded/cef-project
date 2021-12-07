@@ -8,7 +8,7 @@ namespace shared {
 
 // No CefApp for other subprocesses.
 CefRefPtr<CefApp> CreateOtherProcessApp() {
-  return NULL;
+  return nullptr;
 }
 
 }  // namespace shared

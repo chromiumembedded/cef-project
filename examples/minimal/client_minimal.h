@@ -17,17 +17,17 @@ class Client : public CefClient,
   Client();
 
   // CefClient methods:
-  CefRefPtr<CefDisplayHandler> GetDisplayHandler() OVERRIDE { return this; }
-  CefRefPtr<CefLifeSpanHandler> GetLifeSpanHandler() OVERRIDE { return this; }
+  CefRefPtr<CefDisplayHandler> GetDisplayHandler() override { return this; }
+  CefRefPtr<CefLifeSpanHandler> GetLifeSpanHandler() override { return this; }
 
   // CefDisplayHandler methods:
   void OnTitleChange(CefRefPtr<CefBrowser> browser,
-                     const CefString& title) OVERRIDE;
+                     const CefString& title) override;
 
   // CefLifeSpanHandler methods:
-  void OnAfterCreated(CefRefPtr<CefBrowser> browser) OVERRIDE;
-  bool DoClose(CefRefPtr<CefBrowser> browser) OVERRIDE;
-  void OnBeforeClose(CefRefPtr<CefBrowser> browser) OVERRIDE;
+  void OnAfterCreated(CefRefPtr<CefBrowser> browser) override;
+  bool DoClose(CefRefPtr<CefBrowser> browser) override;
+  void OnBeforeClose(CefRefPtr<CefBrowser> browser) override;
 
  private:
   IMPLEMENT_REFCOUNTING(Client);

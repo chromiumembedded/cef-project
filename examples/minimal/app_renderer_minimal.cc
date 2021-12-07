@@ -8,7 +8,7 @@ namespace shared {
 
 // No CefApp for the renderer subprocess.
 CefRefPtr<CefApp> CreateRendererProcessApp() {
-  return NULL;
+  return nullptr;
 }
 
 }  // namespace shared

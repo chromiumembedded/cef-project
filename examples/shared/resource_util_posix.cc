@@ -51,13 +51,13 @@ bool GetResourceString(const std::string& resource_path,
 CefRefPtr<CefStreamReader> GetResourceReader(const std::string& resource_path) {
   std::string path;
   if (!GetResourceDir(path))
-    return NULL;
+    return nullptr;
 
   path.append("/");
   path.append(resource_path);
 
   if (!FileExists(path.c_str()))
-    return NULL;
+    return nullptr;
 
   return CefStreamReader::CreateForFile(path);
 }

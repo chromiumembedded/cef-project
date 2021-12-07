@@ -49,7 +49,7 @@ CefRefPtr<CefResourceHandler> GetResourceHandler(
     const std::string& resource_path) {
   CefRefPtr<CefStreamReader> reader = GetResourceReader(resource_path);
   if (!reader)
-    return NULL;
+    return nullptr;
 
   return new CefStreamResourceHandler(GetMimeType(resource_path), reader);
 }

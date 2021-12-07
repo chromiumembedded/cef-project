@@ -20,29 +20,29 @@ class Client : public CefClient,
   explicit Client(const CefString& startup_url);
 
   // CefClient methods:
-  CefRefPtr<CefDisplayHandler> GetDisplayHandler() OVERRIDE { return this; }
-  CefRefPtr<CefLifeSpanHandler> GetLifeSpanHandler() OVERRIDE { return this; }
-  CefRefPtr<CefRequestHandler> GetRequestHandler() OVERRIDE { return this; }
+  CefRefPtr<CefDisplayHandler> GetDisplayHandler() override { return this; }
+  CefRefPtr<CefLifeSpanHandler> GetLifeSpanHandler() override { return this; }
+  CefRefPtr<CefRequestHandler> GetRequestHandler() override { return this; }
   bool OnProcessMessageReceived(CefRefPtr<CefBrowser> browser,
                                 CefRefPtr<CefFrame> frame,
                                 CefProcessId source_process,
-                                CefRefPtr<CefProcessMessage> message) OVERRIDE;
+                                CefRefPtr<CefProcessMessage> message) override;
 
   // CefDisplayHandler methods:
   void OnTitleChange(CefRefPtr<CefBrowser> browser,
-                     const CefString& title) OVERRIDE;
+                     const CefString& title) override;
 
   // CefLifeSpanHandler methods:
-  void OnAfterCreated(CefRefPtr<CefBrowser> browser) OVERRIDE;
-  bool DoClose(CefRefPtr<CefBrowser> browser) OVERRIDE;
-  void OnBeforeClose(CefRefPtr<CefBrowser> browser) OVERRIDE;
+  void OnAfterCreated(CefRefPtr<CefBrowser> browser) override;
+  bool DoClose(CefRefPtr<CefBrowser> browser) override;
+  void OnBeforeClose(CefRefPtr<CefBrowser> browser) override;
 
   // CefRequestHandler methods:
   bool OnBeforeBrowse(CefRefPtr<CefBrowser> browser,
                       CefRefPtr<CefFrame> frame,
                       CefRefPtr<CefRequest> request,
                       bool user_gesture,
-                      bool is_redirect) OVERRIDE;
+                      bool is_redirect) override;
   CefRefPtr<CefResourceRequestHandler> GetResourceRequestHandler(
       CefRefPtr<CefBrowser> browser,
       CefRefPtr<CefFrame> frame,
@@ -50,20 +50,20 @@ class Client : public CefClient,
       bool is_navigation,
       bool is_download,
       const CefString& request_initiator,
-      bool& disable_default_handling) OVERRIDE;
+      bool& disable_default_handling) override;
   void OnRenderProcessTerminated(CefRefPtr<CefBrowser> browser,
-                                 TerminationStatus status) OVERRIDE;
+                                 TerminationStatus status) override;
 
   // CefResourceRequestHandler methods:
   CefRefPtr<CefResourceHandler> GetResourceHandler(
       CefRefPtr<CefBrowser> browser,
       CefRefPtr<CefFrame> frame,
-      CefRefPtr<CefRequest> request) OVERRIDE;
+      CefRefPtr<CefRequest> request) override;
 
  private:
   // Handles the browser side of query routing.
   CefRefPtr<CefMessageRouterBrowserSide> message_router_;
-  scoped_ptr<CefMessageRouterBrowserSide::Handler> message_handler_;
+  std::unique_ptr<CefMessageRouterBrowserSide::Handler> message_handler_;
 
   const CefString startup_url_;
 

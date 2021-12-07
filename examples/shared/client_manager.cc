@@ -11,7 +11,7 @@ namespace shared {
 
 namespace {
 
-ClientManager* g_manager = NULL;
+ClientManager* g_manager = nullptr;
 
 }  // namespace
 
@@ -22,7 +22,7 @@ ClientManager::ClientManager() : is_closing_(false) {
 ClientManager::~ClientManager() {
   DCHECK(thread_checker_.CalledOnValidThread());
   DCHECK(browser_list_.empty());
-  g_manager = NULL;
+  g_manager = nullptr;
 }
 
 // static

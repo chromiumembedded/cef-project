@@ -23,7 +23,7 @@ class RequestDumpResourceProvider : public CefResourceManager::Provider {
     DCHECK(!url.empty());
   }
 
-  bool OnRequest(scoped_refptr<CefResourceManager::Request> request) OVERRIDE {
+  bool OnRequest(scoped_refptr<CefResourceManager::Request> request) override {
     CEF_REQUIRE_IO_THREAD();
 
     const std::string& url = request->url();
@@ -52,7 +52,7 @@ class RequestDumpResourceProvider : public CefResourceManager::Provider {
 void SetupResourceManager(CefRefPtr<CefResourceManager> resource_manager) {
   if (!CefCurrentlyOn(TID_IO)) {
     // Execute on the browser IO thread.
-    CefPostTask(TID_IO, base::Bind(SetupResourceManager, resource_manager));
+    CefPostTask(TID_IO, base::BindOnce(SetupResourceManager, resource_manager));
     return;
   }
 
@@ -122,7 +122,7 @@ cef_return_value_t Client::OnBeforeResourceLoad(
     CefRefPtr<CefBrowser> browser,
     CefRefPtr<CefFrame> frame,
     CefRefPtr<CefRequest> request,
-    CefRefPtr<CefRequestCallback> callback) {
+    CefRefPtr<CefCallback> callback) {
   CEF_REQUIRE_IO_THREAD();
 
   return resource_manager_->OnBeforeResourceLoad(browser, frame, request,

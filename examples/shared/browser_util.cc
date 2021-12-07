@@ -20,7 +20,7 @@ class WindowDelegate : public CefWindowDelegate {
   explicit WindowDelegate(CefRefPtr<CefBrowserView> browser_view)
       : browser_view_(browser_view) {}
 
-  void OnWindowCreated(CefRefPtr<CefWindow> window) OVERRIDE {
+  void OnWindowCreated(CefRefPtr<CefWindow> window) override {
     // Add the browser view and show the window.
     window->AddChildView(browser_view_);
     window->Show();
@@ -29,11 +29,11 @@ class WindowDelegate : public CefWindowDelegate {
     browser_view_->RequestFocus();
   }
 
-  void OnWindowDestroyed(CefRefPtr<CefWindow> window) OVERRIDE {
-    browser_view_ = NULL;
+  void OnWindowDestroyed(CefRefPtr<CefWindow> window) override {
+    browser_view_ = nullptr;
   }
 
-  bool CanClose(CefRefPtr<CefWindow> window) OVERRIDE {
+  bool CanClose(CefRefPtr<CefWindow> window) override {
     // Allow the window to close if the browser says it's OK.
     CefRefPtr<CefBrowser> browser = browser_view_->GetBrowser();
     if (browser)
@@ -41,12 +41,12 @@ class WindowDelegate : public CefWindowDelegate {
     return true;
   }
 
-  CefSize GetPreferredSize(CefRefPtr<CefView> view) OVERRIDE {
+  CefSize GetPreferredSize(CefRefPtr<CefView> view) override {
     // Preferred window size.
     return CefSize(800, 600);
   }
 
-  CefSize GetMinimumSize(CefRefPtr<CefView> view) OVERRIDE {
+  CefSize GetMinimumSize(CefRefPtr<CefView> view) override {
     // Minimum window size.
     return CefSize(200, 100);
   }
@@ -81,7 +81,7 @@ void CreateBrowser(CefRefPtr<CefClient> client,
   if (use_views) {
     // Create the BrowserView.
     CefRefPtr<CefBrowserView> browser_view = CefBrowserView::CreateBrowserView(
-        client, startup_url, settings, NULL, NULL, NULL);
+        client, startup_url, settings, nullptr, nullptr, nullptr);
 
     // Create the Window. It will show itself after creation.
     CefWindow::CreateTopLevelWindow(new WindowDelegate(browser_view));
@@ -92,12 +92,12 @@ void CreateBrowser(CefRefPtr<CefClient> client,
 #if defined(OS_WIN)
     // On Windows we need to specify certain flags that will be passed to
     // CreateWindowEx().
-    window_info.SetAsPopup(NULL, "examples");
+    window_info.SetAsPopup(nullptr, "examples");
 #endif
 
     // Create the browser window.
     CefBrowserHost::CreateBrowser(window_info, client, startup_url, settings,
-                                  NULL, NULL);
+                                  nullptr, nullptr);
   }
 }
 

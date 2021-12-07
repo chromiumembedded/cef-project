@@ -10,15 +10,15 @@ The [Chromium Embedded Framework](https://bitbucket.org/chromiumembedded/cef/) (
 
 First install some necessary tools and download the cef-project source code.
 
-1\. Install [CMake](https://cmake.org/), a cross-platform open-source build system. Version 2.8.12.1 or newer is required.
+1\. Install [CMake](https://cmake.org/), a cross-platform open-source build system. Version 3.19 or newer is required.
 
 2\. Install [Python](https://www.python.org/downloads/). Version 2.7.x is required. If Python is not installed to the default location you can set the `PYTHON_EXECUTABLE` environment variable before running CMake (watch for errors during the CMake generation step below).
 
 3\. Install platform-specific build tools.
 
-* Linux: Currently supported distributions include Debian Wheezy, Ubuntu Precise, and related. Ubuntu 18.04 64-bit is recommended. Newer versions will likely also work but may not have been tested. Required packages include: build-essential, libgtk2.0-dev, libgtkglext1-dev.
-* MacOS: Xcode 8 or newer building on MacOS 10.11 (El Capitan) or newer for x86_64. Xcode 12.2 or newer building on MacOS 10.15.4 (Catalina) or newer for ARM64. The Xcode command-line tools must also be installed. Only 64-bit builds are supported on macOS.
-* Windows: Visual Studio 2015 Update 2 or newer building on Windows 7 or newer. Visual Studio 2019 and Windows 10 64-bit are recommended.
+* Linux: Currently supported distributions include Debian 10 (Buster), Ubuntu 18 (Bionic Beaver), and related. Ubuntu 18.04 64-bit with GCC 7.5.0+ is recommended. Newer versions will likely also work but may not have been tested. Required packages include: build-essential, libgtk-3-dev.
+* MacOS: Xcode 12.2 to 13.0 building on MacOS 10.15.4 (Catalina) or newer. The Xcode command-line tools must also be installed. Only 64-bit builds are supported on macOS.
+* Windows: Visual Studio 2019 or newer building on Windows 7 or newer. Windows 10 64-bit are recommended.
 
 4\. Download the cef-project source code from the [Downloads page](https://bitbucket.org/chromiumembedded/cef-project/downloads) or by using [Git](https://git-scm.com/) command-line tools:
 
@@ -61,9 +61,9 @@ cmake -G "Visual Studio 16" -A x64 ..
 
 CMake supports different generators on each platform. Run `cmake --help` to list all supported generators. Generators that have been tested with CEF include:
 
-* Linux: Ninja, Unix Makefiles
-* MacOS: Ninja, Xcode 8+ (x86_64) or Xcode 12.2+ (ARM64)
-* Windows: Ninja, Visual Studio 2015+
+* Linux: Ninja, GCC 7.5.0+, Unix Makefiles
+* MacOS: Ninja, Xcode 12.2 to 13.0
+* Windows: Ninja, Visual Studio 2019+
 
 Ninja is a cross-platform open-source tool for running fast builds using pre-installed platform toolchains (GNU, clang, Xcode or MSVC). See comments in the "third_party/cef/cef_binary_*/CMakeLists.txt" file for Ninja usage instructions.
 
@@ -94,7 +94,7 @@ Here are some activities you might want to try next to gain a better understandi
 * Create a new "myproject" directory in the root cef-project directory (e.g. "/path/to/cef-project/myproject").
 * Copy the contents of the "third_party/cef/cef_binary_*/tests/cefsimple" directory to "myproject" as a starting point.
 * Add a new `add_subdirectory(myproject)` command near the end of [top-level CMakeLists.txt file](https://bitbucket.org/chromiumembedded/cef-project/src/master/CMakeLists.txt?fileviewer=file-view-default) after the existing add_subdirectory commands.
-* Change the "CEF_TARGET" and "CEF_HELPER_TARGET" values in "myproject/CMakeLists.txt" from "cefsimple" to "myproject".
+* Change the "CEF_TARGET", "CEF_HELPER_TARGET" and "CEF_HELPER_OUTPUT_NAME" values in "myproject/CMakeLists.txt" replacing "cefsimple" with "myproject".
 * (Windows only) Rename the "cefclient.exe.manifest" file to "myproject.exe.manifest" in both "myproject/CMakeLists.txt" and the "myproject" directory.
 * Re-run the cmake and build commands.
 

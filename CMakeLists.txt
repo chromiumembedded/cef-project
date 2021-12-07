@@ -4,7 +4,8 @@
 
 # See the included README.md file for usage instructions.
 
-cmake_minimum_required(VERSION 2.8.12.1)
+# For VS2019 and Xcode 12+ support.
+cmake_minimum_required(VERSION 3.19)
 
 # Only generate Debug and Release configuration types.
 set(CMAKE_CONFIGURATION_TYPES Debug Release)
@@ -21,7 +22,7 @@ set_property(GLOBAL PROPERTY OS_FOLDERS ON)
 #
 
 # Specify the CEF distribution version.
-set(CEF_VERSION "91.1.23+g04c8d56+chromium-91.0.4472.164")
+set(CEF_VERSION "96.0.16+g89c902b+chromium-96.0.4664.55")
 
 # Determine the platform.
 if("${CMAKE_SYSTEM_NAME}" STREQUAL "Darwin")
@@ -139,7 +140,7 @@ if(WITH_EXAMPLES)
 endif()
 
 # TODO: Include other application targets here.
-
+add_subdirectory(myproject)
 
 # Display configuration settings.
 PRINT_CEF_CONFIG()

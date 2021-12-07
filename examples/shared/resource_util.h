@@ -56,11 +56,11 @@ CefResourceManager::Provider* CreateBinaryResourceProvider(
 // resource is not found.
 bool GetResourceString(const std::string& resource_path, std::string& out_data);
 
-// Retrieve |resource_path| contents as a CefStreamReader. Returns NULL if the
-// resource is not found.
+// Retrieve |resource_path| contents as a CefStreamReader. Returns nullptr if
+// the resource is not found.
 CefRefPtr<CefStreamReader> GetResourceReader(const std::string& resource_path);
 
-// Retrieve |resource_path| contents as a CefResourceHandler. Returns NULL if
+// Retrieve |resource_path| contents as a CefResourceHandler. Returns nullptr if
 // the resource is not found.
 CefRefPtr<CefResourceHandler> GetResourceHandler(
     const std::string& resource_path);

@@ -15,13 +15,13 @@
 #include "examples/shared/client_manager.h"
 
 // Receives notifications from the application.
-@interface SharedAppDelegate : NSObject<NSApplicationDelegate>
+@interface SharedAppDelegate : NSObject <NSApplicationDelegate>
 - (void)createApplication:(id)object;
 - (void)tryToTerminateApplication:(NSApplication*)app;
 @end
 
 // Provide the CefAppProtocol implementation required by CEF.
-@interface SharedApplication : NSApplication<CefAppProtocol> {
+@interface SharedApplication : NSApplication <CefAppProtocol> {
  @private
   BOOL handlingSendEvent_;
 }
@@ -143,7 +143,7 @@ int main(int argc, char* argv[]) {
   // Initialize CEF for the browser process. The first browser instance will be
   // created in CefBrowserProcessHandler::OnContextInitialized() after CEF has
   // been initialized.
-  CefInitialize(main_args, settings, app, NULL);
+  CefInitialize(main_args, settings, app, nullptr);
 
   // Create the application delegate.
   NSObject* delegate = [[SharedAppDelegate alloc] init];

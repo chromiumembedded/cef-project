@@ -140,7 +140,6 @@ if(WITH_EXAMPLES)
 endif()
 
 # TODO: Include other application targets here.
-add_subdirectory(myproject)
 
 # Display configuration settings.
 PRINT_CEF_CONFIG()

@@ -17,7 +17,7 @@ First install some necessary tools and download the cef-project source code.
 3\. Install platform-specific build tools.
 
 * Linux: Currently supported distributions include Debian 10 (Buster), Ubuntu 18 (Bionic Beaver), and related. Ubuntu 18.04 64-bit with GCC 7.5.0+ is recommended. Newer versions will likely also work but may not have been tested. Required packages include: build-essential, libgtk-3-dev.
-* MacOS: Xcode 12.2 to 13.0 building on MacOS 10.15.4 (Catalina) or newer. The Xcode command-line tools must also be installed. Only 64-bit builds are supported on macOS.
+* MacOS: Xcode 12.2 to 13.4 building on MacOS 10.15.4 (Catalina) or newer. The Xcode command-line tools must also be installed. Only 64-bit builds are supported on macOS.
 * Windows: Visual Studio 2019 or newer building on Windows 7 or newer. Windows 10 64-bit are recommended.
 
 4\. Download the cef-project source code from the [Downloads page](https://bitbucket.org/chromiumembedded/cef-project/downloads) or by using [Git](https://git-scm.com/) command-line tools:
@@ -37,8 +37,8 @@ cd /path/to/cef-project
 mkdir build
 cd build
 
-# To perform a Linux build using a 32-bit CEF binary distribution on a 32-bit
-# Linux platform or a 64-bit CEF binary distribution on a 64-bit Linux platform:
+# To perform a Linux build using a CEF binary distribution matching the host
+# architecture (x64, ARM or ARM64):
 cmake -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Release ..
 make -j4
 
@@ -57,12 +57,16 @@ cmake -G "Visual Studio 16" -A Win32 ..
 # To perform a Windows build using a 64-bit CEF binary distribution:
 cmake -G "Visual Studio 16" -A x64 ..
 # Then, open build\cef.sln in Visual Studio 2019 and select Build > Build Solution.
+
+# To perform a Windows build using an ARM64 CEF binary distribution:
+cmake -G "Visual Studio 16" -A arm64 ..
+# Then, open build\cef.sln in Visual Studio 2019 and select Build > Build Solution.
 ```
 
 CMake supports different generators on each platform. Run `cmake --help` to list all supported generators. Generators that have been tested with CEF include:
 
 * Linux: Ninja, GCC 7.5.0+, Unix Makefiles
-* MacOS: Ninja, Xcode 12.2 to 13.0
+* MacOS: Ninja, Xcode 12.2 to 13.4
 * Windows: Ninja, Visual Studio 2019+
 
 Ninja is a cross-platform open-source tool for running fast builds using pre-installed platform toolchains (GNU, clang, Xcode or MSVC). See comments in the "third_party/cef/cef_binary_*/CMakeLists.txt" file for Ninja usage instructions.

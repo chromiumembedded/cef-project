@@ -20,9 +20,6 @@ namespace shared {
 
 // Entry point function for all processes.
 int APIENTRY wWinMain(HINSTANCE hInstance) {
-  // Enable High-DPI support on Windows 7 or newer.
-  CefEnableHighDPISupport();
-
   void* sandbox_info = nullptr;
 
 #if defined(CEF_USE_SANDBOX)

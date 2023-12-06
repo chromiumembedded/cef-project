@@ -26,7 +26,7 @@ class MessageHandler : public CefMessageRouterBrowserSide::Handler {
   // Called due to cefQuery execution in message_router.html.
   bool OnQuery(CefRefPtr<CefBrowser> browser,
                CefRefPtr<CefFrame> frame,
-               int64 query_id,
+               int64_t query_id,
                const CefString& request,
                bool persistent,
                CefRefPtr<Callback> callback) override {

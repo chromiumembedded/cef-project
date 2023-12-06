@@ -10,9 +10,9 @@ The [Chromium Embedded Framework](https://bitbucket.org/chromiumembedded/cef/) (
 
 First install some necessary tools and download the cef-project source code.
 
-1\. Install [CMake](https://cmake.org/), a cross-platform open-source build system. Version 3.19 or newer is required.
+1\. Install [CMake](https://cmake.org/), a cross-platform open-source build system. Version 3.21 or newer is required.
 
-2\. Install [Python](https://www.python.org/downloads/). Version 2.7.x is required. If Python is not installed to the default location you can set the `PYTHON_EXECUTABLE` environment variable before running CMake (watch for errors during the CMake generation step below).
+2\. Install [Python](https://www.python.org/downloads/). Version 2.7.x or 3.9.x is required. If Python is not installed to the default location you can set the `PYTHON_EXECUTABLE` environment variable before running CMake (watch for errors during the CMake generation step below).
 
 3\. Install platform-specific build tools.
 

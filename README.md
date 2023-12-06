@@ -17,7 +17,7 @@ First install some necessary tools and download the cef-project source code.
 3\. Install platform-specific build tools.
 
 * Linux: Currently supported distributions include Debian 10 (Buster), Ubuntu 18 (Bionic Beaver), and related. Ubuntu 18.04 64-bit with GCC 7.5.0+ is recommended. Newer versions will likely also work but may not have been tested. Required packages include: build-essential, libgtk-3-dev.
-* MacOS: Xcode 12.2 to 15.0 building on MacOS 10.15.4 (Catalina) or newer. The Xcode command-line tools must also be installed. Only 64-bit builds are supported on macOS.
+* MacOS: Xcode 12.2 to 15.0 building on MacOS 10.15.4 (Catalina) or newer. The Xcode command-line tools must also be installed.
 * Windows: Visual Studio 2022 building on Windows 10 or newer. Windows 10/11 64-bit is recommended.
 
 4\. Download the cef-project source code from the [Downloads page](https://bitbucket.org/chromiumembedded/cef-project/downloads) or by using [Git](https://git-scm.com/) command-line tools:

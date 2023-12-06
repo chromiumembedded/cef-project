@@ -4,8 +4,8 @@
 
 # See the included README.md file for usage instructions.
 
-# For VS2019 and Xcode 12+ support.
-cmake_minimum_required(VERSION 3.19)
+# For VS2022 and Xcode 12+ support.
+cmake_minimum_required(VERSION 3.21)
 
 # Only generate Debug and Release configuration types.
 set(CMAKE_CONFIGURATION_TYPES Debug Release)

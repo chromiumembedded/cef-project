@@ -68,10 +68,13 @@ int APIENTRY wWinMain(HINSTANCE hInstance) {
   settings.no_sandbox = true;
 #endif
 
-  // Initialize CEF for the browser process. The first browser instance will be
+  // Initialize the CEF browser process. The first browser instance will be
   // created in CefBrowserProcessHandler::OnContextInitialized() after CEF has
-  // been initialized.
-  CefInitialize(main_args, settings, app, sandbox_info);
+  // been initialized. May return false if initialization fails or if early exit
+  // is desired (for example, due to process singleton relaunch behavior).
+  if (!CefInitialize(main_args, settings, app, sandbox_info)) {
+    return 1;
+  }
 
   // Run the CEF message loop. This will block until CefQuitMessageLoop() is
   // called.

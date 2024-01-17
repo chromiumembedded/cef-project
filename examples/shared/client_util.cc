@@ -7,6 +7,7 @@
 #include <sstream>
 #include <string>
 
+#include "include/cef_command_line.h"
 #include "include/views/cef_browser_view.h"
 #include "include/views/cef_window.h"
 #include "include/wrapper/cef_helpers.h"
@@ -18,8 +19,6 @@ namespace shared {
 void OnTitleChange(CefRefPtr<CefBrowser> browser, const CefString& title) {
   CEF_REQUIRE_UI_THREAD();
 
-#if defined(OS_WIN) || defined(OS_LINUX)
-  // The Views framework is currently only supported on Windows and Linux.
   CefRefPtr<CefBrowserView> browser_view =
       CefBrowserView::GetForBrowser(browser);
   if (browser_view) {
@@ -27,9 +26,7 @@ void OnTitleChange(CefRefPtr<CefBrowser> browser, const CefString& title) {
     CefRefPtr<CefWindow> window = browser_view->GetWindow();
     if (window)
       window->SetTitle(title);
-  } else
-#endif
-  {
+  } else if (!IsChromeRuntimeEnabled()) {
     // Set the title of the window using platform APIs.
     PlatformTitleChange(browser, title);
   }
@@ -110,6 +107,23 @@ std::string DumpRequestContents(CefRefPtr<CefRequest> request) {
   }
 
   return ss.str();
+}
+
+bool IsViewsEnabled() {
+  static bool enabled = []() {
+    // Chrome runtime requires use of the Views framework.
+    return IsChromeRuntimeEnabled() ||
+           CefCommandLine::GetGlobalCommandLine()->HasSwitch("use-views");
+  }();
+  return enabled;
+}
+
+bool IsChromeRuntimeEnabled() {
+  static bool enabled = []() {
+    return CefCommandLine::GetGlobalCommandLine()->HasSwitch(
+        "enable-chrome-runtime");
+  }();
+  return enabled;
 }
 
 }  // namespace shared

@@ -13,6 +13,7 @@
 
 #include "examples/shared/app_factory.h"
 #include "examples/shared/client_manager.h"
+#include "examples/shared/main_util.h"
 
 // Receives notifications from the application.
 @interface SharedAppDelegate : NSObject <NSApplicationDelegate>
@@ -127,6 +128,9 @@ int main(int argc, char* argv[]) {
   // Provide CEF with command-line arguments.
   CefMainArgs main_args(argc, argv);
 
+  // Create a temporary CommandLine object.
+  CefRefPtr<CefCommandLine> command_line = CreateCommandLine(main_args);
+
   // Create a CefApp for the browser process. Other processes are handled by
   // process_helper_mac.cc.
   CefRefPtr<CefApp> app = CreateBrowserProcessApp();
@@ -139,6 +143,14 @@ int main(int argc, char* argv[]) {
 
   // Specify CEF global settings here.
   CefSettings settings;
+
+  // Use the CEF Chrome runtime if "--enable-chrome-runtime" is specified via
+  // the command-line. Otherwise, use the CEF Alloy runtime. For more
+  // information about CEF runtimes see
+  // https://bitbucket.org/chromiumembedded/cef/wiki/Architecture.md#markdown-header-cef3
+  if (command_line->HasSwitch("enable-chrome-runtime")) {
+    settings.chrome_runtime = true;
+  }
 
   // Initialize the CEF browser process. The first browser instance will be
   // created in CefBrowserProcessHandler::OnContextInitialized() after CEF has

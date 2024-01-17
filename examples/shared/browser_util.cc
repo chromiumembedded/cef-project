@@ -4,7 +4,8 @@
 
 #include "examples/shared/browser_util.h"
 
-#include "include/cef_command_line.h"
+#include "examples/shared/client_util.h"
+
 #include "include/views/cef_browser_view.h"
 #include "include/views/cef_window.h"
 #include "include/wrapper/cef_helpers.h"
@@ -65,20 +66,10 @@ void CreateBrowser(CefRefPtr<CefClient> client,
                    const CefBrowserSettings& settings) {
   CEF_REQUIRE_UI_THREAD();
 
-#if defined(OS_WIN) || defined(OS_LINUX)
-  CefRefPtr<CefCommandLine> command_line =
-      CefCommandLine::GetGlobalCommandLine();
-
-  // Create the browser using the Views framework if "--use-views" is specified
-  // via the command-line. Otherwise, create the browser using the native
-  // platform framework. The Views framework is currently only supported on
-  // Windows and Linux.
-  const bool use_views = command_line->HasSwitch("use-views");
-#else
-  const bool use_views = false;
-#endif
-
-  if (use_views) {
+  // Create the browser using the Views framework if "--use-views"  or
+  // "--enable-chrome-runtime" is specified via the command-line. Otherwise,
+  // create the browser using the native platform framework.
+  if (IsViewsEnabled()) {
     // Create the BrowserView.
     CefRefPtr<CefBrowserView> browser_view = CefBrowserView::CreateBrowserView(
         client, startup_url, settings, nullptr, nullptr, nullptr);

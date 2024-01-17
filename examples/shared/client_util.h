@@ -26,6 +26,12 @@ void PlatformTitleChange(CefRefPtr<CefBrowser> browser, const CefString& title);
 // Returns the contents of |request| as a string.
 std::string DumpRequestContents(CefRefPtr<CefRequest> request);
 
+// Returns true if use of the Views framework is enabled.
+bool IsViewsEnabled();
+
+// Returns true if use of the Chrome runtime is enabled.
+bool IsChromeRuntimeEnabled();
+
 }  // namespace shared
 
 #endif  // CEF_EXAMPLES_SHARED_CLIENT_BASE_H_

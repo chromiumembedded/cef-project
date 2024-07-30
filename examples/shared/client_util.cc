@@ -26,7 +26,7 @@ void OnTitleChange(CefRefPtr<CefBrowser> browser, const CefString& title) {
     CefRefPtr<CefWindow> window = browser_view->GetWindow();
     if (window)
       window->SetTitle(title);
-  } else if (!IsChromeRuntimeEnabled()) {
+  } else {
     // Set the title of the window using platform APIs.
     PlatformTitleChange(browser, title);
   }
@@ -111,17 +111,17 @@ std::string DumpRequestContents(CefRefPtr<CefRequest> request) {
 
 bool IsViewsEnabled() {
   static bool enabled = []() {
-    // Chrome runtime requires use of the Views framework.
-    return IsChromeRuntimeEnabled() ||
-           CefCommandLine::GetGlobalCommandLine()->HasSwitch("use-views");
+    // Views is enabled by default, unless `--use-native` is specified.
+    return !CefCommandLine::GetGlobalCommandLine()->HasSwitch("use-native");
   }();
   return enabled;
 }
 
-bool IsChromeRuntimeEnabled() {
+bool IsAlloyStyleEnabled() {
   static bool enabled = []() {
-    return CefCommandLine::GetGlobalCommandLine()->HasSwitch(
-        "enable-chrome-runtime");
+    // Chrome style is enabled by default, unless `--use-alloy-style` is
+    // specified.
+    return CefCommandLine::GetGlobalCommandLine()->HasSwitch("use-alloy-style");
   }();
   return enabled;
 }

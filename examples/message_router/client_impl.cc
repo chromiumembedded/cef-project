@@ -136,7 +136,9 @@ CefRefPtr<CefResourceRequestHandler> Client::GetResourceRequestHandler(
 }
 
 void Client::OnRenderProcessTerminated(CefRefPtr<CefBrowser> browser,
-                                       TerminationStatus status) {
+                                       TerminationStatus status,
+                                       int error_code,
+                                       const CefString& error_string) {
   CEF_REQUIRE_UI_THREAD();
 
   message_router_->OnRenderProcessTerminated(browser);

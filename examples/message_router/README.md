@@ -21,7 +21,7 @@ The "message_router" target is implemented as follows:
       * Creates a `CefMessageRouterBrowserSide` instance to handle the browser side of message routing.
       * Creates a `CefMessageRouterBrowserSide::Handler` instance to handle messages specific to the test code in [message_router.html](resources/message_router.html).
       * Implements the `GetResourceHandler` method to support loading of [message_router.html](resources/message_router.html) via https://example.com/message_router.html.
- * Windows resource loading implementation in [resource_util_win_impl.cc](resource_util_win_impl.cc) and [resource.rc](resources/win/resource.rc).
+ * Windows resource loading implementation in [resource_util_win_impl.cc](resource_util_win_impl.cc) and [resource.rc](win/resource.rc).
      * Implements the [shared::GetResourceId](../shared/resource_util.h) method to map resource paths to BINARY ID values.
      * Defines a BINARY resource to include [message_router.html](resources/message_router.html) in the executable.
 

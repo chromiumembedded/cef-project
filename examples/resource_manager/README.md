@@ -18,7 +18,7 @@ The "resource_manager" target is implemented as follows:
       * Creates a `CefResourceManager` instance to handle resource requests.
       * Defines a `RequestDumpResourceProvider` class to demonstrate custom `CefResourceManager::Provider` handling.
       * Registers the `CefResourceManager::Provider` instances with the `CefResourceManager`.
- * Windows resource loading implementation in [resource_util_win_impl.cc](resource_util_win_impl.cc) and [resource.rc](resources/win/resource.rc).
+ * Windows resource loading implementation in [resource_util_win_impl.cc](resource_util_win_impl.cc) and [resource.rc](win/resource.rc).
      * Implements the [shared::GetResourceId](../shared/resource_util.h) method to map resource paths to BINARY ID values.
      * Defines a BINARY resource to include [logo.png](resources/logo.png) and [resource_manager.html](resources/resource_manager.html) in the executable.
 

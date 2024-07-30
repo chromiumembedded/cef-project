@@ -10,27 +10,25 @@
 if(OS_MAC)
   # Shared macOS resources (menus, icons, etc).
   set(SHARED_RESOURCES_SRCS
-    ../shared/resources/mac/English.lproj/InfoPlist.strings
-    ../shared/resources/mac/English.lproj/MainMenu.xib
-    ../shared/resources/mac/Info.plist
-    ../shared/resources/mac/shared.icns
+    ../shared/mac/English.lproj/InfoPlist.strings
+    ../shared/mac/English.lproj/MainMenu.xib
+    ../shared/mac/shared.icns
     )
 
   # Info.plist files used for main and helper app bundles.
-  set(SHARED_INFO_PLIST ../shared/resources/mac/Info.plist)
-  set(SHARED_HELPER_INFO_PLIST ../shared/resources/mac/helper-Info.plist)
+  set(SHARED_INFO_PLIST ../shared/mac/Info.plist.in)
+  set(SHARED_HELPER_INFO_PLIST ../shared/mac/helper-Info.plist.in)
 elseif(OS_WINDOWS)
   # Shared Windows resources (version information, icons).
   set(SHARED_RESOURCES_SRCS
-    ../shared/resources/win/big.ico
-    ../shared/resources/win/resource.h
-    ../shared/resources/win/shared.rc
-    ../shared/resources/win/small.ico
+    ../shared/win/big.ico
+    ../shared/win/resource.h
+    ../shared/win/small.ico
     )
 
   # Manifest files used for executables.
-  set(SHARED_EXE_MANIFEST ../shared/resources/win/shared.exe.manifest)
-  set(SHARED_COMPATIBILITY_MANIFEST ../shared/resources/win/compatibility.manifest)
+  set(SHARED_EXE_MANIFEST ../shared/win/shared.exe.manifest)
+  set(SHARED_COMPATIBILITY_MANIFEST ../shared/win/compatibility.manifest)
 endif()
 
 

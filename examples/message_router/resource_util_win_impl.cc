@@ -4,7 +4,7 @@
 
 #include "examples/shared/resource_util.h"
 
-#include "examples/message_router/resources/win/resource.h"
+#include "examples/message_router/resource.h"
 
 namespace shared {
 

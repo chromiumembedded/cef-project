@@ -1,6 +1,6 @@
 // Microsoft Visual C++ generated resource script.
 //
-#include "resource.h"
+#include "examples/minimal/resource.h"
 
 #define APSTUDIO_READONLY_SYMBOLS
 /////////////////////////////////////////////////////////////////////////////
@@ -23,15 +23,8 @@ LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
 #pragma code_page(1252)
 #endif //_WIN32
 
-
-/////////////////////////////////////////////////////////////////////////////
-//
-// Binary
-//
-
-IDS_LOGO_PNG BINARY "..\\logo.png"
-IDS_RESOURCE_MANAGER_HTML BINARY "..\\resource_manager.html"
-
+// Include the shared RC file.
+#include "examples/shared/win/shared.rc"
 
 #ifdef APSTUDIO_INVOKED
 /////////////////////////////////////////////////////////////////////////////

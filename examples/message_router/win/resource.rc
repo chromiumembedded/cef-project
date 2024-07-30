@@ -1,6 +1,6 @@
 // Microsoft Visual C++ generated resource script.
 //
-#include "resource.h"
+#include "examples/message_router/resource.h"
 
 #define APSTUDIO_READONLY_SYMBOLS
 /////////////////////////////////////////////////////////////////////////////
@@ -23,14 +23,15 @@ LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
 #pragma code_page(1252)
 #endif //_WIN32
 
+// Include the shared RC file.
+#include "examples/shared/win/shared.rc"
 
 /////////////////////////////////////////////////////////////////////////////
 //
 // Binary
 //
 
-IDS_LOGO_PNG BINARY "..\\logo.png"
-IDS_SCHEME_HANDLER_HTML BINARY "..\\scheme_handler.html"
+IDS_MESSAGE_ROUTER_HTML BINARY "examples\\message_router\\resources\\message_router.html"
 
 
 #ifdef APSTUDIO_INVOKED

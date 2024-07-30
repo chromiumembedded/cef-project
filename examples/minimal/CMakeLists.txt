@@ -13,7 +13,11 @@ set(EXAMPLE_SRCS
   client_minimal.h
   main_minimal.cc
   )
-
+set(EXAMPLE_SRCS_WINDOWS
+  resource.h
+  )
+APPEND_PLATFORM_SOURCES(EXAMPLE_SRCS)
+  
 if(OS_LINUX OR OS_WINDOWS)
   # On Windows and Linux the same executable is used for all processes.
   set(EXAMPLE_SRCS
@@ -30,9 +34,19 @@ elseif(OS_MAC)
     )
 endif()
 
+# Main executable resources.
+set(EXAMPLE_RESOURCES_SRCS
+  )
+set(EXAMPLE_RESOURCES_SRCS_WINDOWS
+  # Resources that embed the *.html and *.png files in the executable.
+  win/resource.rc
+  )
+APPEND_PLATFORM_SOURCES(EXAMPLE_RESOURCES_SRCS)
+
 if(OS_MACOSX OR OS_WINDOWS)
   # On macOS and Windows include the shared resources.
   set(EXAMPLE_RESOURCES_SRCS
+    ${EXAMPLE_RESOURCES_SRCS}
     ${SHARED_RESOURCES_SRCS}
     )
 endif()
@@ -120,7 +134,7 @@ if(OS_MAC)
     # manually because the configure_file command (which is executed as part of
     # MACOSX_BUNDLE_INFO_PLIST) uses global env variables and would insert the
     # wrong values with multiple targets.
-    set(_helper_info_plist "${CMAKE_CURRENT_BINARY_DIR}/helper-Info${_target_suffix}.plist")
+    set(_helper_info_plist "${CMAKE_CURRENT_BINARY_DIR}/helper-Info${_target_suffix}.plist.in")
     file(READ "${CMAKE_CURRENT_SOURCE_DIR}/${SHARED_HELPER_INFO_PLIST}" _plist_contents)
     string(REPLACE "\${EXECUTABLE_NAME}" "${_helper_output_name}" _plist_contents ${_plist_contents})
     string(REPLACE "\${PRODUCT_NAME}" "${_helper_output_name}" _plist_contents ${_plist_contents})
@@ -160,7 +174,7 @@ if(OS_MAC)
   # directive but that doesn't properly handle nested resource directories.
   # Remove these prefixes from input file paths.
   set(PREFIXES
-    "../shared/resources/mac/"
+    "../shared/mac/"
     )
   COPY_MAC_RESOURCES("${EXAMPLE_RESOURCES_SRCS}" "${PREFIXES}" "${EXAMPLE_TARGET}" "${CMAKE_CURRENT_SOURCE_DIR}" "${EXAMPLE_APP}")
 endif()

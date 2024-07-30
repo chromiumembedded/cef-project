@@ -4,7 +4,7 @@
 
 #include "examples/shared/resource_util.h"
 
-#include "examples/scheme_handler/resources/win/resource.h"
+#include "examples/scheme_handler/resource.h"
 
 namespace shared {
 

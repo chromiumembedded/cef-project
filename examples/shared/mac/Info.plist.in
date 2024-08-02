@@ -9,11 +9,11 @@
 	<key>CFBundleIconFile</key>
 	<string>shared.icns</string>
 	<key>CFBundleIdentifier</key>
-	<string>org.cef.shared</string>
+	<string>org.cef.${PRODUCT_NAME}</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>${PRODUCT_NAME}</string>
+	<string>${EXECUTABLE_NAME}</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleVersion</key>

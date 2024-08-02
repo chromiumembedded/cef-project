@@ -51,3 +51,8 @@ Thumbs.db
 /tools/buildtools/linux64/clang-format
 /tools/buildtools/mac/clang-format
 /tools/buildtools/win/clang-format.exe
+# Bazel generated files
+bazel/cef/platform.bzl
+# Bazel output files/directories
+bazel-*
+MODULE.bazel.lock

@@ -1,0 +1,170 @@
+# Copyright (c) 2024 The Chromium Embedded Framework Authors. All rights
+# reserved. Use of this source code is governed by a BSD-style license that
+# can be found in the LICENSE file.
+
+load("@rules_cc//cc:defs.bzl", "cc_library", "objc_library")
+
+PRODUCT_NAME = "shared"
+PKG_NAME = "//examples/{}".format(PRODUCT_NAME)
+
+# Allow access from all //examples packages.
+package(default_visibility = [
+    "//examples:__subpackages__",
+])
+
+#
+# Source file lists.
+#
+
+srcs_common = [
+    "app_factory.h",
+    "main_util.cc",
+    "main_util.h",
+]
+
+srcs_browser = [
+    "client_manager.cc",
+    "client_manager.h",
+    "client_util.cc",
+    "client_util.h",
+    "browser_util.cc",
+    "browser_util.h",
+    "main.h",
+    "resource_util.cc",
+    "resource_util.h",
+]
+
+srcs_browser_linux = [
+    "client_util_linux.cc",
+    "main_linux.cc",
+    "resource_util_linux.cc",
+    "resource_util_posix.cc",
+]
+
+srcs_browser_mac = [
+    "client_util_mac.mm",
+    "main_mac.mm",
+    "resource_util_mac.mm",
+    "resource_util_posix.cc",
+]
+
+srcs_browser_win = [
+    "client_util_win.cc",
+    "main_win.cc",
+    "resource_util_win.cc",
+]
+
+srcs_renderer = [
+]
+
+srcs_renderer_mac = [
+    "process_helper_mac.cc",
+    "process_helper_mac.h",
+]
+
+#
+# MacOS targets.
+#
+
+filegroup(
+    name = "ResourcesMac",
+    srcs = [
+        "mac/English.lproj/InfoPlist.strings",
+        "mac/English.lproj/MainMenu.xib",
+        "mac/{}.icns".format(PRODUCT_NAME),
+    ],
+)
+
+# Use alias() to allow file access from outside this package.
+alias(
+    name = "Info.plist.in",
+    actual = "mac/Info.plist.in"
+)
+
+alias(
+    name = "helper-Info.plist.in",
+    actual = "mac/helper-Info.plist.in"
+)
+
+objc_library(
+    name = "BrowserLibMac",
+    srcs = srcs_common + srcs_browser + srcs_browser_mac,
+    target_compatible_with = [
+        "@platforms//os:macos",
+    ],
+    deps = [
+        "@cef//:cef_wrapper",
+    ],
+)
+
+cc_library(
+    name = "RendererLibMac",
+    srcs = srcs_common + srcs_renderer + srcs_renderer_mac,
+    target_compatible_with = [
+        "@platforms//os:macos",
+    ],
+    deps = [
+        "@cef//:cef_wrapper",
+    ],
+)
+
+#
+# Windows targets.
+#
+
+filegroup(
+    name = "ResourcesWin",
+    srcs = [
+        "win/big.ico",
+        "win/shared.rc",
+        "win/small.ico",
+    ],
+)
+
+# Headers used by win/shared.rc to be included by the declare_exe target.
+cc_library(
+    name = "ResourceH",
+    hdrs = [
+        "win/resource.h",
+    ],
+    deps = [
+        # For inclusion of the "include/cef_version.h" header.
+        "@cef//:cef_wrapper",
+    ],
+)
+
+# Use alias() to allow file access from outside this package.
+alias(
+    name = "compatibility.manifest",
+    actual = "win/compatibility.manifest"
+)
+
+alias(
+    name = "shared.exe.manifest",
+    actual = "win/shared.exe.manifest"
+)
+
+# Include files directly in the declare_exe target. This simplifies the build
+# configuration and avoids issues with Windows discarding symbols (like WinMain)
+# when linking libraries.
+filegroup(
+    name = "SrcsWin",
+    srcs = srcs_common + srcs_browser + srcs_browser_win + srcs_renderer,
+    target_compatible_with = [
+        "@platforms//os:windows",
+    ],
+)
+
+#
+# Linux targets.
+#
+
+# Include files directly in the declare_exe target. This simplifies the build
+# configuration.
+filegroup(
+    name = "SrcsLinux",
+    srcs = srcs_common + srcs_browser + srcs_browser_linux + srcs_renderer,
+    target_compatible_with = [
+        "@platforms//os:linux",
+    ],
+)

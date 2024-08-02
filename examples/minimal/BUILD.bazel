@@ -1,0 +1,163 @@
+# Copyright (c) 2024 The Chromium Embedded Framework Authors. All rights
+# reserved. Use of this source code is governed by a BSD-style license that
+# can be found in the LICENSE file.
+
+PRODUCT_NAME = "minimal"
+PKG_NAME = "//examples/{}".format(PRODUCT_NAME)
+
+# Allow access from all //examples packages.
+package(default_visibility = [
+    "//examples:__subpackages__",
+])
+
+load("@rules_cc//cc:defs.bzl", "cc_library", "objc_library")
+
+#
+# Source file lists.
+#
+
+srcs_common = [
+]
+
+srcs_renderer = [
+    "app_other_minimal.cc",
+    "app_renderer_minimal.cc",
+]
+
+srcs_renderer_mac = [
+    "process_helper_mac_minimal.cc",
+]
+
+srcs_browser = [
+    "app_browser_minimal.cc",
+    "client_minimal.cc",
+    "client_minimal.h",
+    "main_minimal.cc",
+]
+
+srcs_browser_linux = [
+]
+
+srcs_browser_mac = [
+]
+
+srcs_browser_win = [
+    "resource_util_win_impl.cc",
+]
+
+srcs_resources = [
+]
+
+filegroup(
+    name = "Resources",
+    srcs = srcs_resources,
+)
+
+# Use alias() to allow file access from outside this package.
+alias(
+    name = "file-app_other_minimal.cc",
+    actual = "app_other_minimal.cc"
+)
+
+alias(
+    name = "file-app_renderer_minimal.cc",
+    actual = "app_renderer_minimal.cc"
+)
+
+alias(
+    name = "file-client_minimal.cc",
+    actual = "client_minimal.cc"
+)
+
+alias(
+    name = "file-client_minimal.h",
+    actual = "client_minimal.h"
+)
+
+alias(
+    name = "file-main_minimal.cc",
+    actual = "main_minimal.cc"
+)
+
+alias(
+    name = "file-process_helper_mac_minimal.cc",
+    actual = "process_helper_mac_minimal.cc"
+)
+
+#
+# MacOS targets.
+#
+
+objc_library(
+    name = "BrowserLibMac",
+    srcs = srcs_common + srcs_browser + srcs_browser_mac,
+    target_compatible_with = [
+        "@platforms//os:macos",
+    ],
+    deps = [
+        "@cef//:cef_wrapper",
+        "//examples/shared:BrowserLibMac",
+    ],
+)
+
+objc_library(
+    name = "RendererLibMac",
+    srcs = srcs_common + srcs_renderer + srcs_renderer_mac,
+    target_compatible_with = [
+        "@platforms//os:macos",
+    ],
+    deps = [
+        "@cef//:cef_wrapper",
+        "//examples/shared:RendererLibMac",
+    ],
+)
+
+#
+# Windows targets.
+#
+
+# Headers used by win/resource.rc to be included by the declare_exe target.
+cc_library(
+    name = "ResourceH",
+    hdrs = [
+        "resource.h"
+    ]
+)
+
+# Include files directly in the declare_exe target. This simplifies the build
+# configuration and avoids issues with Windows discarding symbols (like WinMain)
+# when linking libraries.
+filegroup(
+    name = "SrcsWin",
+    srcs = srcs_common + srcs_browser + srcs_browser_win + srcs_renderer,
+    target_compatible_with = [
+        "@platforms//os:windows",
+    ],
+)
+
+#
+# Linux targets.
+#
+
+# Include files directly in the declare_exe target. This simplifies the build
+# configuration.
+filegroup(
+    name = "SrcsLinux",
+    srcs = srcs_common + srcs_browser + srcs_browser_linux + srcs_renderer,
+    target_compatible_with = [
+        "@platforms//os:linux",
+    ],
+)
+
+#
+# Alias to platform-specific build targets.
+#
+
+alias(
+    name = PRODUCT_NAME,
+    actual = select({
+        "@platforms//os:linux": "{}/linux:{}".format(PKG_NAME, PRODUCT_NAME),
+        "@platforms//os:macos": "{}/mac:{}".format(PKG_NAME, PRODUCT_NAME),
+        "@platforms//os:windows": "{}/win:{}".format(PKG_NAME, PRODUCT_NAME),
+    }),
+)

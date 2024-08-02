@@ -5,6 +5,7 @@
 from __future__ import absolute_import
 from glob import iglob
 from io import open
+import os
 import sys
 
 
@@ -37,6 +38,19 @@ def write_file(name, data):
     (errno, strerror) = e.args
     sys.stderr.write('Failed to write file ' + name + ': ' + strerror)
     raise
+
+
+def write_file_if_changed(name, data):
+  """ Write a file if the contents have changed. Returns True if the file was written. """
+  if os.path.exists(name):
+    old_contents = read_file(name)
+  else:
+    old_contents = ''
+
+  if (data != old_contents):
+    write_file(name, data)
+    return True
+  return False
 
 
 def get_files(search_glob):

@@ -1,0 +1,43 @@
+# Copyright (c) 2024 The Chromium Embedded Framework Authors. All rights
+# reserved. Use of this source code is governed by a BSD-style license that
+# can be found in the LICENSE file.
+
+PRODUCT_NAME = "message_router"
+PKG_NAME = "//examples/{}".format(PRODUCT_NAME)
+
+# Allow access from the parent package only.
+package(default_visibility = [
+    "{}:__pkg__".format(PKG_NAME),
+])
+
+load("@cef//bazel:copy_filegroups.bzl", "copy_filegroups")
+load("@cef//bazel/linux:exe_helpers.bzl", "declare_exe")
+
+#
+# Linux executable target.
+#
+
+# Copy resources into the current project.
+copy_target = "{}_resources".format(PRODUCT_NAME)
+copy_filegroups(
+    name = copy_target,
+    filegroups = [
+        "{}:Resources".format(PKG_NAME),
+    ],
+    remove_prefixes = [
+        "examples/{}/resources".format(PRODUCT_NAME),
+    ],
+    add_prefix = "{}_files".format(PRODUCT_NAME),
+)
+
+declare_exe(
+    name = PRODUCT_NAME,
+    srcs = [
+        "{}:SrcsLinux".format(PKG_NAME),
+        "//examples/shared:SrcsLinux",
+    ],
+    data = [
+        ":{}".format(copy_target),
+    ],
+)
+

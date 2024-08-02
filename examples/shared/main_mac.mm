@@ -122,58 +122,53 @@ int main(int argc, char* argv[]) {
   if (!library_loader.LoadInMain())
     return 1;
 
-  // Initialize the AutoRelease pool.
-  NSAutoreleasePool* autopool = [[NSAutoreleasePool alloc] init];
+  // Scoped AutoRelease pool.
+  @autoreleasepool {
+    // Provide CEF with command-line arguments.
+    CefMainArgs main_args(argc, argv);
 
-  // Provide CEF with command-line arguments.
-  CefMainArgs main_args(argc, argv);
+    // Create a temporary CommandLine object.
+    CefRefPtr<CefCommandLine> command_line = CreateCommandLine(main_args);
 
-  // Create a temporary CommandLine object.
-  CefRefPtr<CefCommandLine> command_line = CreateCommandLine(main_args);
+    // Create a CefApp for the browser process. Other processes are handled by
+    // process_helper_mac.cc.
+    CefRefPtr<CefApp> app = CreateBrowserProcessApp();
 
-  // Create a CefApp for the browser process. Other processes are handled by
-  // process_helper_mac.cc.
-  CefRefPtr<CefApp> app = CreateBrowserProcessApp();
+    // Initialize the SharedApplication instance.
+    [SharedApplication sharedApplication];
 
-  // Initialize the SharedApplication instance.
-  [SharedApplication sharedApplication];
+    // Create the singleton manager instance.
+    ClientManager manager;
 
-  // Create the singleton manager instance.
-  ClientManager manager;
+    // Specify CEF global settings here.
+    CefSettings settings;
 
-  // Specify CEF global settings here.
-  CefSettings settings;
+    // Use the CEF Chrome bootstrap. The Alloy bootstrap is deprecated and
+    // removed in M128. See https://github.com/chromiumembedded/cef/issues/3685.
+    settings.chrome_runtime = true;
 
-  // Use the CEF Chrome bootstrap. The Alloy bootstrap is deprecated and removed
-  // in M128. See https://github.com/chromiumembedded/cef/issues/3685.
-  settings.chrome_runtime = true;
+    // Initialize the CEF browser process. The first browser instance will be
+    // created in CefBrowserProcessHandler::OnContextInitialized() after CEF has
+    // been initialized. May return false if initialization fails or if early
+    // exit is desired (for example, due to process singleton relaunch
+    // behavior).
+    if (!CefInitialize(main_args, settings, app, nullptr)) {
+      return 1;
+    }
 
-  // Initialize the CEF browser process. The first browser instance will be
-  // created in CefBrowserProcessHandler::OnContextInitialized() after CEF has
-  // been initialized. May return false if initialization fails or if early exit
-  // is desired (for example, due to process singleton relaunch behavior).
-  if (!CefInitialize(main_args, settings, app, nullptr)) {
-    return 1;
+    // Create the application delegate.
+    NSObject* delegate = [[SharedAppDelegate alloc] init];
+    [delegate performSelectorOnMainThread:@selector(createApplication:)
+                               withObject:nil
+                            waitUntilDone:NO];
+
+    // Run the CEF message loop. This will block until CefQuitMessageLoop() is
+    // called.
+    CefRunMessageLoop();
+
+    // Shut down CEF.
+    CefShutdown();
   }
-
-  // Create the application delegate.
-  NSObject* delegate = [[SharedAppDelegate alloc] init];
-  [delegate performSelectorOnMainThread:@selector(createApplication:)
-                             withObject:nil
-                          waitUntilDone:NO];
-
-  // Run the CEF message loop. This will block until CefQuitMessageLoop() is
-  // called.
-  CefRunMessageLoop();
-
-  // Shut down CEF.
-  CefShutdown();
-
-  // Release the delegate.
-  [delegate release];
-
-  // Release the AutoRelease pool.
-  [autopool release];
 
   return 0;
 }

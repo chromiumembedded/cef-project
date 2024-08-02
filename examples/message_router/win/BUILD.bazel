@@ -1,0 +1,41 @@
+# Copyright (c) 2024 The Chromium Embedded Framework Authors. All rights
+# reserved. Use of this source code is governed by a BSD-style license that
+# can be found in the LICENSE file.
+
+PRODUCT_NAME = "message_router"
+PKG_NAME = "//examples/{}".format(PRODUCT_NAME)
+
+# Allow access from the parent package only.
+package(default_visibility = [
+    "{}:__pkg__".format(PKG_NAME),
+])
+
+load("@cef//bazel/win:exe_helpers.bzl", "declare_exe")
+
+#
+# Windows executable target.
+#
+
+declare_exe(
+    name = PRODUCT_NAME,
+    srcs = [
+        "{}:SrcsWin".format(PKG_NAME),
+        "//examples/shared:SrcsWin",
+    ],
+    rc_file = "resource.rc",
+    manifest_srcs = [
+        "//examples/shared:compatibility.manifest",
+        "//examples/shared:shared.exe.manifest",
+    ],
+    resources_srcs = [
+        "{}:Resources".format(PKG_NAME),
+        "//examples/shared:ResourcesWin",
+    ],
+    resources_deps = [
+        "{}:ResourceH".format(PKG_NAME),
+        "//examples/shared:ResourceH",
+    ],
+    linkopts = [
+        "/SUBSYSTEM:WINDOWS",
+    ],
+)

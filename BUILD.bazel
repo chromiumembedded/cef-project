@@ -1,0 +1,90 @@
+# Copyright (c) 2024 The Chromium Embedded Framework Authors. All rights
+# reserved. Use of this source code is governed by a BSD-style license that
+# can be found in the LICENSE file.
+
+# Allow access from targets in other packages.
+package(default_visibility = [
+    "//visibility:public",
+])
+
+load("@bazel_skylib//lib:selects.bzl", "selects")
+
+#
+# Define supported configurations.
+# See https://bazel.build/docs/configurable-attributes
+#
+# Normal build (ARM64 host):
+# % bazel build //examples/minimal [-c dbg]
+#
+# Cross-compile build (ARM64 host):
+# % bazel build //examples/minimal --cpu=darwin_x86_64 [-c dbg]
+#
+
+config_setting(
+    name = "dbg",
+    values = {"compilation_mode": "dbg"},
+)
+
+config_setting(
+    name = "fastbuild",
+    values = {"compilation_mode": "fastbuild"},
+)
+
+config_setting(
+    name = "opt",
+    values = {"compilation_mode": "opt"},
+)
+
+selects.config_setting_group(
+    name = "windows_32",
+    match_all = ["@platforms//os:windows", "@platforms//cpu:x86_32"],
+)
+
+selects.config_setting_group(
+    name = "windows_64",
+    match_all = ["@platforms//os:windows", "@platforms//cpu:x86_64"],
+)
+
+selects.config_setting_group(
+    name = "windows_arm64",
+    match_all = ["@platforms//os:windows", "@platforms//cpu:arm64"],
+)
+
+selects.config_setting_group(
+    name = "linux_64",
+    match_all = ["@platforms//os:windows", "@platforms//cpu:x86_64"],
+)
+
+selects.config_setting_group(
+    name = "linux_arm64",
+    match_all = ["@platforms//os:windows", "@platforms//cpu:arm64"],
+)
+
+selects.config_setting_group(
+    name = "linux_arm",
+    match_all = ["@platforms//os:windows", "@platforms//cpu:armv7"],
+)
+
+config_setting(
+    name = "darwin_x86_64",
+    values = {
+        "cpu": "darwin_x86_64"
+    }
+)
+
+config_setting(
+    name = "darwin_arm64",
+    values = {
+        "cpu": "darwin_arm64"
+    }
+)
+
+selects.config_setting_group(
+    name = "macos_64",
+    match_all = ["@platforms//os:macos", ":darwin_x86_64"],
+)
+
+selects.config_setting_group(
+    name = "macos_arm64",
+    match_all = ["@platforms//os:macos", ":darwin_arm64"],
+)

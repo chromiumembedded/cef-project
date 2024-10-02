@@ -75,10 +75,6 @@ int main(int argc, char* argv[]) {
   // Specify CEF global settings here.
   CefSettings settings;
 
-  // Use the CEF Chrome bootstrap. The Alloy bootstrap is deprecated and removed
-  // in M128. See https://github.com/chromiumembedded/cef/issues/3685.
-  settings.chrome_runtime = true;
-
   // Initialize the CEF browser process. The first browser instance will be
   // created in CefBrowserProcessHandler::OnContextInitialized() after CEF has
   // been initialized. May return false if initialization fails or if early exit

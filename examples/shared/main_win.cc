@@ -64,10 +64,6 @@ int APIENTRY wWinMain(HINSTANCE hInstance) {
   // Specify CEF global settings here.
   CefSettings settings;
 
-  // Use the CEF Chrome bootstrap. The Alloy bootstrap is deprecated and removed
-  // in M128. See https://github.com/chromiumembedded/cef/issues/3685.
-  settings.chrome_runtime = true;
-
 #if !defined(CEF_USE_SANDBOX)
   settings.no_sandbox = true;
 #endif
